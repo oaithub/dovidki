@@ -13,12 +13,12 @@
 
         <div class="form-group">
             <label for="name">Ваше ім'я:</label>
-            <input class="form-control" name="user_name" type="text">
+            <input class="form-control" name="user_name" type="text" required>
         </div>
 
         <div class="form-group">
             <label for="group">Ваша група:</label>
-            <select class="form-control" name="user_group">
+            <select class="form-control" name="user_group" required>
                 <option value="" hidden>Виберіть</option>
                 @foreach($groups as $id => $name)
                     <option value="{{ $id }}">{{ $name }}</option>
@@ -29,11 +29,11 @@
         <div class="form-row">
             <div class="form-group col">
                 <label for="period_from">Початок періоду</label>
-                <input class="form-control" name="period_from" type="date" value="{{ Carbon\Carbon::now()->subMonth()->format('Y-m-d') }}">
+                <input class="form-control" name="period_from" type="date" value="{{ Carbon\Carbon::now()->subMonth()->format('Y-m-d') }}" required>
             </div>
             <div class="form-group col">
                 <label for="period_to">Кінець періоду</label>
-                <input class="form-control" name="period_to" type="date" value="{{ Carbon\Carbon::now()->format('Y-m-d') }}">
+                <input class="form-control" name="period_to" type="date" value="{{ Carbon\Carbon::now()->format('Y-m-d') }}" required>
             </div>
         </div>
         <input class="btn btn-primary form-control" type="submit" value="Відправити">
