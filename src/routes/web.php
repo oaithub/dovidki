@@ -14,16 +14,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    //return dd(Auth::user());
     return view('home');
 });
-
-//Auth::routes();   //TODO:Delete unused authorization
 
 
 Route::get('/redirect', 'LoginController@redirectToProvider');
 Route::get('/callback', 'LoginController@handleProviderCallback');
 
 Route::get('login', 'LoginController@login');
+Route::get('logout', 'LoginController@logout');
 
 Route::get('/orders', 'OrdersController@index');
 Route::get('/orders/create', 'OrdersController@create');

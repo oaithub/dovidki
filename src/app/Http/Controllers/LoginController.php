@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 Use App\User;
+use Auth;
 use Socialite;
 
 class LoginController extends Controller
@@ -24,25 +25,31 @@ class LoginController extends Controller
     use AuthenticatesUsers;
 
     /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = RouteServiceProvider::HOME;
-
-    /**
      * Create a new controller instance.
      *
      * @return void
      */
     public function __construct()
     {
-        //$this->middleware('guest')->except('logout');    //TODO: Edit this middleware
+        $this->middleware('guest')->except('logout');    //Authorized users can visit only logout page
+        $this->middleware('auth')->only('logout');
     }
 
     public function login()
     {
         return view('auth.login');
+    }
+
+    /**
+     * Log users out of application.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function logout()
+    {
+        Auth::logout();
+
+        return redirect()->action('LoginController@login');
     }
 
     /**
@@ -65,7 +72,8 @@ class LoginController extends Controller
         try {
             $user = Socialite::driver('google')->user();
         } catch (\Exception $e) {
-            return redirect()->action('LoginController@login')->withErrors(['driver_error', 'Невідома помилка. Спробуйте ще раз.']);    //TODO:Add error list, login page, change all redirects below
+            return redirect()->action('LoginController@login')
+                ->withErrors(['driver_error', 'Невідома помилка. Спробуйте ще раз.']);    //TODO:Add error list, login page, change all redirects below
         }
         // only allow people with @oa.edu.ua to login
         if(explode("@", $user->email)[1] !== 'oa.edu.ua'){

@@ -3,6 +3,7 @@
 @section('title', 'Створення заяви')
 
 @section('content')
+    {{-- TODO: Delete group and name fields, or change to read-only fields --}}
 
     <header>
         <h1>Створення заяви</h1>

@@ -15,8 +15,7 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('user_name');
-            $table->string('user_group');
+            $table->unsignedInteger('user_id');
             $table->boolean('completed')->default(false);
             $table->timestamp('published_after')->nullable()->default(null);
             $table->timestamp('period_from')->nullable();
