@@ -17,7 +17,7 @@ class RedirectIfNeedAuthentication
     public function handle($request, Closure $next)
     {
         if (! Auth::check()) {
-            return redirect()->action('LoginController@login')->withErrors('Для перегляду необхідно ввійти в систему');
+            return redirect()->route('logout')->withErrors('Для перегляду необхідно ввійти в систему');
         }
 
         return $next($request);

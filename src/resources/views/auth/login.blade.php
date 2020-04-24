@@ -10,14 +10,7 @@
                 <h1 class="mb-3">Довідки НаУОА</h1>
             </div>
             <a class="btn btn-lg btn-danger btn-block" href="{{ action('LoginController@redirectToProvider') }}">Вхід через пошту  &#64;oa.edu.ua</a>
-
-            @if( $errors->any() )
-                @foreach($errors->all() as $error)
-                    <ul class="list-group mt-2">
-                        <li class="list-group-item list-group-item-danger ">{{ $error }}</li>
-                    </ul>
-                @endforeach
-            @endif
+            @include('layouts._errors')
         </div>
     </div>
 @endsection

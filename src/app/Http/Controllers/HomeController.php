@@ -3,26 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
 
 class HomeController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    /**
-     * Show the application dashboard.
+     * Redirect user to his profile and manager to the control panel
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
     {
-        return view('home');
+        if(Auth::user()->isManager()) {
+            return redirect()->route('manager');
+        }
+        else {
+            return redirect()->route('currentProfile');
+        }
     }
 }

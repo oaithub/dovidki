@@ -24,17 +24,6 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('guest')->except('logout');    //Authorized users can visit only logout page
-        $this->middleware('auth')->only('logout');
-    }
-
     public function login()
     {
         return view('auth.login');
@@ -49,7 +38,7 @@ class LoginController extends Controller
     {
         Auth::logout();
 
-        return redirect()->action('LoginController@login');
+        return redirect()->route('login');
     }
 
     /**
@@ -72,13 +61,13 @@ class LoginController extends Controller
         try {
             $user = Socialite::driver('google')->user();
         } catch (\Exception $e) {
-            return redirect()->action('LoginController@login')
-                ->withErrors(['driver_error', 'Невідома помилка. Спробуйте ще раз.']);    //TODO:Add error list, login page, change all redirects below
+            return redirect()->route('login')
+                ->withErrors('Невідома помилка. Спробуйте ще раз.');    //TODO:Add error list, login page, change all redirects below
         }
         // only allow people with @oa.edu.ua to login
         if(explode("@", $user->email)[1] !== 'oa.edu.ua'){
-            return redirect()->action('LoginController@login')
-                ->withErrors(['need_university_email', 'Вхід в систему дозволений лише з поштою @oa.edu.ua']);
+            return redirect()->route('login')
+                ->withErrors('Вхід в систему дозволений лише з поштою @oa.edu.ua');
 
         }
         // check if they're an existing user
@@ -97,6 +86,6 @@ class LoginController extends Controller
             $newUser->save();
             auth()->login($newUser, true);
         }
-        return redirect('/');
+        return redirect(RouteServiceProvider::HOME);
     }
 }

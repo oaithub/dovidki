@@ -71,9 +71,39 @@ class User extends Authenticatable
         '122' => "Комп’ютерні науки"
     ];
 
+    /**
+     * Return array of all university groups
+     *
+     * @return array
+     */
     public static function getGroupList()
     {
         return self::$groups;
+    }
+
+    /**
+     * Check if current user is a manager
+     *
+     * @return bool
+     */
+    public function isManager()
+    {
+        if( $this->group == 'manager' ) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    /**
+     * Return all orders that belongs to user
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 
 }

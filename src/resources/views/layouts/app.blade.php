@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/bootstrap.datepicker/0.1/css/datepicker.css">
 </head>
 <body>
-    <div class="container">
+    <div class="container mt-4">
         @yield('content')
     </div>
 

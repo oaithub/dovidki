@@ -13,26 +13,32 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    //return dd(Auth::user());
-    return view('home');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/', 'HomeController@index');    //Redirect common user to his profile, manager to control panel
+
+    Route::get('/orders/create', 'OrdersController@create');    //User order create form
+    Route::post('/orders', 'OrdersController@store');    //User new orders saving
+
+
+    Route::get('/profile', 'UsersController@current')->name('currentProfile');    //User profile view
+
+    Route::middleware('manager')->group(function () {
+
+        Route::get('/profile/{id}', 'UsersController@show')->name('profile');    //Manager profiles view
+        Route::get('/manager', 'OrdersController@index')->name('manager');    //Manager homepage
+        Route::get('/manager/{id}', 'OrdersController@show')->name('order');    //Manager orders view
+        //Route::get('/manager/{order}/review', 'OrdersController@edit');    //Manager orders review form
+
+    });
+
 });
 
+Route::middleware('guest')->group(function () {
+    Route::get('/redirect', 'LoginController@redirectToProvider');
+    Route::get('/callback', 'LoginController@handleProviderCallback');
 
-Route::get('/redirect', 'LoginController@redirectToProvider');
-Route::get('/callback', 'LoginController@handleProviderCallback');
+    Route::get('login', 'LoginController@login')->name('login');
+});
 
-Route::get('login', 'LoginController@login');
-Route::get('logout', 'LoginController@logout');
-
-Route::get('/orders', 'OrdersController@index');
-Route::get('/orders/create', 'OrdersController@create');
-Route::get('/orders/{order}', 'OrdersController@show');
-Route::post('/orders', 'OrdersController@store');
-
-
-/*
-Route::get('/orders/{order}/edit', 'OrdersController@edit');
-Route::patch('/orders/{order}', 'OrdersController@update');
-Route::delete('/orders/{order}', 'OrdersController@destroy');
-*/
+Route::get('logout', 'LoginController@logout')->name('logout');
