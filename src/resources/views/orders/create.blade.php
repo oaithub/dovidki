@@ -14,15 +14,15 @@
 
         <div class="form-group">
             <label for="name">Ваше ім'я:</label>
-            <input class="form-control" name="user_name" type="text" required>
+            <input type="text" readonly class="form-control-plaintext" name="name" value="{{ $user->name }}">
         </div>
 
         <div class="form-group">
             <label for="group">Ваша група:</label>
             <select class="form-control" name="user_group" required>
                 <option value="" hidden>Виберіть</option>
-                @foreach($groups as $id => $name)
-                    <option value="{{ $id }}">{{ $name }}</option>
+                @foreach($groups as $id => $groupInfo)
+                    <option value="{{ $id }}">{{ $groupInfo->speciality }}, {{ $groupInfo->year }} курс</option>
                 @endforeach
             </select>
         </div>

@@ -17,12 +17,11 @@ class RedirectIfNotManager
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::user()->group != 'manager')
-        {
-            return redirect(RouteServiceProvider::HOME)->withErrors('У вас недостатньо прав для перегляду цієї сторінки');
+        if(Auth::user()->isManager()) {
+            return $next($request);
         }
         else {
-            return $next($request);
+            return redirect(RouteServiceProvider::HOME)->withErrors('У вас недостатньо прав для перегляду цієї сторінки');
         }
     }
 }

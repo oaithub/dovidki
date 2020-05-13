@@ -16,8 +16,9 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('user_id');
-            $table->boolean('completed')->default(false);
-            $table->timestamp('published_after')->nullable()->default(null);
+            $table->json('group');
+            $table->boolean('ready')->default(false);
+            $table->timestamp('issued_at')->nullable()->default(null);
             $table->timestamp('period_from')->nullable();
             $table->timestamp('period_to')->nullable();
             $table->timestamps();

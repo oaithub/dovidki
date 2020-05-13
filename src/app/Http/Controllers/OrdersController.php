@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Order;
 use App\User;
-use Request;
 use Auth;
+use Request;
+use Session;
 
 class OrdersController extends Controller
 {
@@ -25,18 +26,30 @@ class OrdersController extends Controller
 
     public function create()
     {
-        $groups = User::getGroupList();    //TODO: Try to use api for getting student group by email
+        $groups = Auth::user()->groups();
+        $user = Auth::user();
 
-        return view('orders.create', compact('groups'));
+        return view('orders.create', compact('groups', 'user'));
     }
 
-    public function store()
+    public function store()    //TODO: Refactor
     {
         $input = Request::all();
         $input['user_id'] = Auth::id();
 
+        $userGroupList = Auth::user()->groups();
+
+        if( $userGroupList->has($input['user_group']) )
+        {
+            $input['group'] = json_encode($userGroupList->get($input['user_group']));
+        }
+        else
+        {
+            return redirect()->back()->withError('Помилка при створенні нової заяви. Повторіть будь ласка ще раз.');
+        }
+
         Order::create($input);    //TODO: Send email
 
-        return redirect()->action('OrdersController@index');
+        return redirect()->route('home');
     }
 }

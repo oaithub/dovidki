@@ -15,9 +15,9 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('/', 'HomeController@index');    //Redirect common user to his profile, manager to control panel
+    Route::get('/', 'HomeController@index')->name('home');    //Redirect common user to his profile, manager to control panel
 
-    Route::get('/orders/create', 'OrdersController@create');    //User order create form
+    Route::get('/orders/create', 'OrdersController@create')->name('createOrder');    //User order create form
     Route::post('/orders', 'OrdersController@store');    //User new orders saving
 
 

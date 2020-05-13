@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Http;
 
 class User extends Authenticatable
 {
@@ -82,19 +83,47 @@ class User extends Authenticatable
     }
 
     /**
+     * Return user name initials in format:
+     * Serhii Petrovych Kovalchuk
+     * Kovalchuk S.P.
+     *
+     * @return array
+     */
+    public function getNameInitials()    //TODO: Refactor(?)
+    {
+        $pieces = mb_split(' ', $this->name);
+        $initials = $pieces[2].' '.mb_substr($pieces[0], 0, 1).'. '.mb_substr($pieces[1], 0, 1).'.';
+
+        return $initials;
+    }
+
+    /**
      * Check if current user is a manager
      *
      * @return bool
      */
     public function isManager()
     {
-        if( $this->group == 'manager' ) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return $this->manager;
     }
+
+    public function groups()
+    {
+        $json = '[{"speciality":"Облік і оподаткування","year":1},{"speciality":"Національна безпека","year":3}]';
+
+        return collect(json_decode($json));
+
+        /*
+        $token = 'skajnflnln';    //TODO: Add request for getting token
+        $url = 'https://api.website.com';
+        $response = Http::withToken($token)->get($url, [
+            'email' => $this->email
+        ])->json();
+
+        return $response;
+        */
+    }
+
 
     /**
      * Return all orders that belongs to user
