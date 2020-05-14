@@ -17,6 +17,7 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->unsignedInteger('user_id');
             $table->json('group');
+            $table->string('type');
             $table->boolean('ready')->default(false);
             $table->timestamp('issued_at')->nullable()->default(null);
             $table->timestamp('period_from')->nullable();

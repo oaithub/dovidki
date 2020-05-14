@@ -9,6 +9,8 @@
         <h1>Створення заяви</h1>
     </header>
 
+    @include('layouts._errors')
+
     <form action="/orders" method="POST">
         @csrf
 
@@ -18,11 +20,21 @@
         </div>
 
         <div class="form-group">
-            <label for="group">Ваша група:</label>
+            <label for="user_group">Ваша група:</label>
             <select class="form-control" name="user_group" required>
                 <option value="" hidden>Виберіть</option>
                 @foreach($groups as $id => $groupInfo)
                     <option value="{{ $id }}">{{ $groupInfo->speciality }}, {{ $groupInfo->year }} курс</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="type">Тип довідки:</label>
+            <select class="form-control" name="type" required>
+                <option value="" hidden>Виберіть</option>
+                @foreach($types as $id => $typeName)
+                    <option value="{{ $id }}">Довідка про {{ $typeName }}</option>
                 @endforeach
             </select>
         </div>

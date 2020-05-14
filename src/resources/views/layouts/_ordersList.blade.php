@@ -15,7 +15,7 @@
                 <th scope="row">{{ $order->id }}</th>
                 <td><a href="{{ route('profile', ['id' => $order->user->id] ) }}">{{ $order->user->getNameInitials() }}</a></td>
                 <td>{{ $order->group->speciality }}, {{ $order->group->year }} курс</td>
-                <td>Доходи</td>{{-- TODO: Add order type --}}
+                <td>{{ $order->type }}</td>
                 <td>{{ $order->state() }}</td>
             </tr>
         @endforeach
