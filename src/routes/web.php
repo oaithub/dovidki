@@ -23,11 +23,11 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/profile', 'UsersController@current')->name('currentProfile');    //User profile view
 
-    Route::middleware('manager')->group(function () {
+    Route::group(['middleware' => 'manager', 'prefix' => 'manager'], function () {
 
         Route::get('/profile/{id}', 'UsersController@show')->name('profile');    //Manager profiles view
-        Route::get('/manager', 'OrdersController@index')->name('manager');    //Manager homepage
-        Route::get('/manager/{id}', 'OrdersController@show')->name('order');    //Manager orders view
+        Route::get('/orders', 'Admin\OrdersController@index')->name('managerAll');    //Manager homepage
+        Route::get('/orders/{id}', 'Admin\OrdersController@show')->name('managerOrder');    //Manager orders view
         //Route::get('/manager/{order}/review', 'OrdersController@edit');    //Manager orders review form
 
     });

@@ -10,14 +10,8 @@ use Session;
 
 class OrdersController extends Controller
 {
-    public function index()
-    {
-        $orders = Order::all();
 
-        return view('orders.index', compact('orders'));
-    }
-
-    public function show($id)
+    public function show($id)    //TODO: One user order
     {
         $order = Order::findOrFail($id);
 
@@ -26,8 +20,8 @@ class OrdersController extends Controller
 
     public function create()
     {
-        $groups = Auth::user()->groups();
         $user = Auth::user();
+        $groups = $user->groups();
         $types = Order::typeList();
 
         return view('orders.create', compact('groups', 'user', 'types'));

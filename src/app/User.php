@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email',
     ];
 
     /**
@@ -26,7 +26,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'remember_token',
     ];
 
     /**
@@ -34,8 +34,8 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
+    protected $casts = [    //TODO: FIll
+
     ];
 
     /**
@@ -65,19 +65,18 @@ class User extends Authenticatable
 
     public function groups()
     {
-        $json = '[{"speciality":"Облік і оподаткування","year":1},{"speciality":"Національна безпека","year":3}]';
-
-        return collect(json_decode($json));
-
         /*
-        $token = 'skajnflnln';    //TODO: Add request for getting token
-        $url = 'https://api.website.com';
-        $response = Http::withToken($token)->get($url, [
-            'email' => $this->email
-        ])->json();
+        $response = '[{"speciality":"Облік і оподаткування","year":1},{"speciality":"Національна безпека","year":3}]';
 
-        return $response;
         */
+
+        //$token = 'skajnflnln';    //TODO: Add request for getting token, diff of ->body and ->json
+        $url = 'https://dekanat.oa.edu.ua/api/v1/student/spacialties';
+        $response = Http::get($url, [
+            'email' => $this->email
+        ])->body();
+
+        return collect(json_decode($response));
     }
 
 

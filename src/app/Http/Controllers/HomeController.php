@@ -15,7 +15,7 @@ class HomeController extends Controller
     public function index()
     {
         if(Auth::user()->isManager()) {
-            return redirect()->route('manager');
+            return redirect()->route('managerAll');
         }
         else {
             return redirect()->route('currentProfile');

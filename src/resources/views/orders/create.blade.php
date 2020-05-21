@@ -24,7 +24,7 @@
             <select class="form-control" name="user_group" required>
                 <option value="" hidden>Виберіть</option>
                 @foreach($groups as $id => $groupInfo)
-                    <option value="{{ $id }}">{{ $groupInfo->speciality }}, {{ $groupInfo->year }} курс</option>
+                    <option value="{{ $id }}">{{ $groupInfo->specialty }}, {{ $groupInfo->year }} курс</option>
                 @endforeach
             </select>
         </div>

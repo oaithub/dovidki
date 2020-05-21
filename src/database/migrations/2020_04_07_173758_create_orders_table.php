@@ -14,8 +14,8 @@ class CreateOrdersTable extends Migration
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedInteger('user_id');
+            $table->increments('id');
+            $table->integer('user_id')->unsigned();
             $table->json('group');
             $table->string('type');
             $table->boolean('ready')->default(false);
@@ -23,6 +23,8 @@ class CreateOrdersTable extends Migration
             $table->timestamp('period_from')->nullable();
             $table->timestamp('period_to')->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
