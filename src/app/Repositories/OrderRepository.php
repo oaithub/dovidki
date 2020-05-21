@@ -20,18 +20,58 @@ class OrderRepository extends CoreRepository
      *
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getAllWithPaginate()
+    public function getAllWithPaginate($count)
     {
         $columns = ['id', 'user_id', 'group', 'type', 'ready', 'issued_at', 'user_id',];
 
         $result = $this->startConditions()
             ->select($columns)
-            ->orderBy('id','DESC')
+            ->oldest('id')
             ->with(['user:id,name'])
-            ->paginate(25);
+            ->paginate($count);
 
         return $result;
     }
+
+    /**
+     * Return collection of ready orders for list with pagination
+     *
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function getReadyWithPaginate($count)
+    {
+        $columns = ['id', 'user_id', 'group', 'type', 'ready', 'issued_at', 'user_id',];
+
+        $result = $this->startConditions()
+            ->select($columns)
+            ->oldest('id')
+            ->where('ready', 1)
+            ->where('issued_at', null)
+            ->with(['user:id,name'])
+            ->paginate($count);
+
+        return $result;
+    }
+
+    /**
+     * Return collection of ready orders for list with pagination
+     *
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function getIssuedWithPaginate($count)
+    {
+        $columns = ['id', 'user_id', 'group', 'type', 'ready', 'issued_at', 'user_id',];
+
+        $result = $this->startConditions()
+            ->select($columns)
+            ->oldest('id')
+            ->where('issued_at','!=' , null)
+            ->with(['user:id,name'])
+            ->paginate($count);
+
+        return $result;
+    }
+
     /**
      *
      *  @param int $id
@@ -48,7 +88,7 @@ class OrderRepository extends CoreRepository
      * @param int $id
      * @return Model
      */
-    public function getForAdminShow($id) {
+    public function getForShow($id) {
         return $this->startConditions()->find($id);
     }
 }

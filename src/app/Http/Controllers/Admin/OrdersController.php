@@ -18,15 +18,30 @@ class OrdersController extends Controller
 
     public function index()
     {
-        $orders = $this->orderRepository->getAllWithPaginate(15);
+        $paginator = $this->orderRepository->getAllWithPaginate(15);
 
-        return view('orders.index', compact('orders'));
+        return view('admin.orders.index', compact('paginator'));
+    }
+
+    public function issued()
+    {
+        $paginator = $this->orderRepository->getIssuedWithPaginate(15);
+
+        return view('admin.orders.issued', compact('paginator'));
+    }
+
+    public function ready()
+    {
+        $paginator = $this->orderRepository->getReadyWithPaginate(15);
+
+        return view('admin.orders.ready', compact('paginator'));
     }
 
     public function show($id)
     {
-        $order = $this->orderRepository->getForAdminShow($id);
+        $order = $this->orderRepository->getForShow($id);
+        abort_if(empty($order), 404);
 
-        return view('orders.show', compact('order'));
+        return view('admin.orders.show', compact('order'));
     }
 }

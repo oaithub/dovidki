@@ -8,6 +8,6 @@
         <h1>Усі заяви</h1>
     </header>
 
-    @include('layouts._ordersList')
+    @include('layouts._order-list')
 
 @endsection

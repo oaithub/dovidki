@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\Repositories\OrderRepository;
 use App\User;
 use Auth;
 use Request;
@@ -10,10 +11,17 @@ use Session;
 
 class OrdersController extends Controller
 {
+    private $orderRepository;
+
+    public function __construct()
+    {
+        $this->orderRepository = app(OrderRepository::class);
+    }
 
     public function show($id)    //TODO: One user order
     {
-        $order = Order::findOrFail($id);
+        $order = $this->orderRepository->getForShow($id);
+        abort_if(empty($order), 404);
 
         return view('orders.show', compact('order'));
     }
