@@ -9,6 +9,9 @@ use App\Order;
 
 class OrdersController extends Controller
 {
+    /**
+     * @var OrderRepository
+     */
     private $orderRepository;
 
     public function __construct()

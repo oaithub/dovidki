@@ -14,17 +14,6 @@
 
     <a href="{{ route('order:create') }}"><button type="button" class="btn btn-primary btn-lg">Створити заявку</button></a>
 
-
-    <div>
-        @if($orders)
-            <ul class="list-group">
-            @foreach($orders as $order)
-                <li class="list-group-item">
-                    Довідка про доходи {{ $order->period_from->format('m-Y') }} - {{ $order->period_to->format('m-Y') }}
-                </li>
-            @endforeach
-            </ul>
-        @endif
-    </div>
+    @include('layouts._order-list')
 
 @endsection

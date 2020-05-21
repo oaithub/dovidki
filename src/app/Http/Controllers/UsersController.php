@@ -2,27 +2,44 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\OrderRepository;
+use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
-use App\Order;
-use App\User;
 use Auth;
 
 class UsersController extends Controller
 {
 
-    public function current()
-    {
-        $user = Auth::user();
-        $orders = $user->orders;
+    /**
+     * @var OrderRepository
+     */
+    private $orderRepository;
+    /**
+     * @var UserRepository
+     */
+    private $userRepository;
 
-        return view('users.profile', compact('user', 'orders'));
+    public function __construct()
+    {
+        $this->orderRepository = app(OrderRepository::class);
+        $this->userRepository = app(UserRepository::class);
+    }
+
+    public function current()    //TODO: Create repository
+    {
+        $user = $this->userRepository->getForShow(Auth::id());
+        abort_if(empty($user), 404);
+        $paginator = $user->orders;
+
+        return view('users.profile', compact('user', 'paginator'));
     }
 
     public function show($id)
     {
-        $user = User::findOrFail($id);
-        $orders = $user->orders;
+        $user = $this->userRepository->getForShow($id);
+        abort_if(empty($user), 404);
+        $paginator = $this->orderRepository->getAllByUserIdWithPaginate($id);
 
-        return view('users.profile', compact('user', 'orders'));
+        return view('users.profile', compact('user', 'paginator'));
     }
 }

@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Order;
 use App\Repositories\OrderRepository;
-use App\User;
 use Auth;
 use Request;
-use Session;
 
 class OrdersController extends Controller
 {
+    /**
+     * @var OrderRepository
+     */
     private $orderRepository;
 
     public function __construct()
