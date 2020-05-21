@@ -17,17 +17,17 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth')->group(function () {
     Route::get('/', 'HomeController@index')->name('home');    //Redirect common user to his profile, manager to control panel
 
-    Route::get('/orders/create', 'OrdersController@create')->name('createOrder');    //User order create form
+    Route::get('/orders/create', 'OrdersController@create')->name('order:create');    //User order create form
     Route::post('/orders', 'OrdersController@store');    //User new orders saving
 
 
-    Route::get('/profile', 'UsersController@current')->name('currentProfile');    //User profile view
+    Route::get('/profile', 'UsersController@current')->name('user:profile');    //User profile view
 
     Route::group(['middleware' => 'manager', 'prefix' => 'manager'], function () {
 
-        Route::get('/profile/{id}', 'UsersController@show')->name('profile');    //Manager profiles view
-        Route::get('/orders', 'Admin\OrdersController@index')->name('managerAll');    //Manager homepage
-        Route::get('/orders/{id}', 'Admin\OrdersController@show')->name('managerOrder');    //Manager orders view
+        Route::get('/profile/{id}', 'UsersController@show')->name('manager:user_profile');    //Manager profiles view
+        Route::get('/orders', 'Admin\OrdersController@index')->name('manager:orders_all');    //Manager homepage
+        Route::get('/orders/{id}', 'Admin\OrdersController@show')->name('manager:order');    //Manager orders view
         //Route::get('/manager/{order}/review', 'OrdersController@edit');    //Manager orders review form
 
     });

@@ -14,11 +14,11 @@
         @foreach($orders as $order)
             <tr>
                 <th scope="row">{{ $order->id }}</th>
-                <td><a href="{{ route('profile', ['id' => $order->user->id] ) }}">{{ $order->user->getNameInitials() }}</a></td>
+                <td><a href="{{ route('manager:user_profile', $order->user->id ) }}">{{ $order->user->getNameInitials() }}</a></td>
                 <td>{{ $order->group->specialty }}, {{ $order->group->year }} курс</td>
                 <td>{{ $order->type }}</td>
                 <td>{{ $order->state() }}</td>
-                <td><a href="{{ route('managerOrder', $order->id) }}" class="btn btn-info btn-sm active" role="button" aria-pressed="true">Перегляд</a></td>
+                <td><a href="{{ route('manager:order', $order->id) }}" class="btn btn-info btn-sm active" role="button" aria-pressed="true">Перегляд</a></td>
             </tr>
         @endforeach
         </tbody>

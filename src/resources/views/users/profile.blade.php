@@ -12,7 +12,7 @@
         e-mail: {{ $user->email }}
     </div>
 
-    <a href="{{ route('createOrder') }}"><button type="button" class="btn btn-primary btn-lg">Створити заявку</button></a>
+    <a href="{{ route('order:create') }}"><button type="button" class="btn btn-primary btn-lg">Створити заявку</button></a>
 
 
     <div>
