@@ -5,19 +5,14 @@
 @section('content')
 
     <header>
-        <h1>Замовлення #{{ $order->id }} - {{ $order->state() }}</h1>
+        <h1>Замовлення #{{ $order->id }}</h1>
     </header>
 
     <div>
-        @if($order->ready)
-            @if(empty($order->issued_at))
-                <h4 class="text-warning">Очікує на видачу</h4>
-            @else
-                <h4 class="text-success">Видана</h4>
-            @endif
-        @else
-            <h4 class="text-danger">Замовлення в розгляді</h4>
-        @endif
+        <h4>
+            @include('layouts._orderState', ['stateCode' => $order->state])
+        </h4>
+
         <p>
             <a href="{{ route('manager:user_profile', $order->user->id ) }}">{{ $order->user->name }}</a><br>
             {{ $order->group->specialty }}, {{ $order->group->year }} курс<br>

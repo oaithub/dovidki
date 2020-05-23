@@ -17,12 +17,15 @@
                 <td><a href="{{ route('manager:user_profile', $order->user->id ) }}">{{ $order->user->getNameInitials() }}</a></td>
                 <td>{{ $order->group->specialty }}, {{ $order->group->year }} курс</td>
                 <td>{{ $order->type }}</td>
-                <td>{{ $order->state() }}</td>
+                <td>
+                    @include('layouts._orderState', ['stateCode' => $order->state])
+                </td>
                 <td><a href="{{ route('manager:order', $order->id) }}" class="btn btn-info btn-sm active" role="button" aria-pressed="true">Перегляд</a></td>
             </tr>
         @endforeach
         </tbody>
     </table>
+
     @if($paginator->total() > $paginator->count())
         <br>
         <div class="row justify-content-center">
@@ -31,4 +34,5 @@
             </div>
         </div>
     @endif
+
 @endif

@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h1>{{ $user["name"] }}</h1>
+    <h1>{{ $user->name }}</h1>
     <div>
         @if($user->isManager())
             <h4 class="text-warning">Права доступу менеджера</h4>
@@ -12,8 +12,11 @@
         e-mail: {{ $user->email }}
     </div>
 
-    <a href="{{ route('order:create') }}"><button type="button" class="btn btn-primary btn-lg">Створити заявку</button></a>
+    <div class="mt-4">
+        <h2>
+            Усі заяви студента
+        </h2>
 
-    @include('layouts._order-list')
-
+        @include('layouts._order-list')
+    </div>
 @endsection

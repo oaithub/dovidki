@@ -18,8 +18,8 @@ class CreateOrdersTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->json('group');
             $table->string('type');
-            $table->boolean('ready')->default(false);
-            $table->timestamp('issued_at')->nullable()->default(null);
+            $table->string('state');
+            $table->string('response_message')->nullable()->default(null);
             $table->timestamp('period_from')->nullable();
             $table->timestamp('period_to')->nullable();
             $table->timestamps();

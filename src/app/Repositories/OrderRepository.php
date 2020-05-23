@@ -23,7 +23,7 @@ class OrderRepository extends CoreRepository
      */
     public function getAllWithPaginate($count = 25)
     {
-        $columns = ['id', 'user_id', 'group', 'type', 'ready', 'issued_at', 'user_id',];
+        $columns = ['id', 'user_id', 'group', 'type', 'state', 'response_message', 'user_id',];
 
         $result = $this->startConditions()
             ->select($columns)
@@ -43,7 +43,7 @@ class OrderRepository extends CoreRepository
      */
     public function getAllByUserIdWithPaginate($userId, $count = 25)
     {
-        $columns = ['id', 'user_id', 'group', 'type', 'ready', 'issued_at', 'user_id',];
+        $columns = ['id', 'user_id', 'group', 'type', 'state', 'response_message', 'user_id',];
 
         $result = $this->startConditions()
             ->select($columns)
@@ -62,13 +62,12 @@ class OrderRepository extends CoreRepository
      */
     public function getReadyWithPaginate($count = 25)
     {
-        $columns = ['id', 'user_id', 'group', 'type', 'ready', 'issued_at', 'user_id',];
+        $columns = ['id', 'user_id', 'group', 'type', 'state', 'response_message', 'user_id',];
 
         $result = $this->startConditions()
             ->select($columns)
             ->oldest('id')
-            ->where('ready', 1)
-            ->where('issued_at', null)
+            ->where('state', 'wait-for-issue')
             ->with(['user:id,name'])
             ->paginate($count);
 
@@ -83,12 +82,12 @@ class OrderRepository extends CoreRepository
      */
     public function getIssuedWithPaginate($count = 25)
     {
-        $columns = ['id', 'user_id', 'group', 'type', 'ready', 'issued_at', 'user_id',];
+        $columns = ['id', 'user_id', 'group', 'type', 'state', 'response_message', 'user_id',];
 
         $result = $this->startConditions()
             ->select($columns)
             ->oldest('id')
-            ->where('issued_at','!=' , null)
+            ->where('state', 'issued')
             ->with(['user:id,name'])
             ->paginate($count);
 

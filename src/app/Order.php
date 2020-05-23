@@ -42,6 +42,18 @@ class Order extends Model
     ];
 
     /**
+     * All order states
+     *
+     * @var array
+     */
+    private static $states = [
+        'in-queue' => 'В черзі',
+        'wait-for-issue' => 'Очікує отримання',
+        'issued' => 'Видана',
+        'canceled-by-manager' => 'Відмінена бухгалтером'
+    ];
+
+    /**
      * Return collection of all order types
      *
      * @return array
@@ -51,7 +63,12 @@ class Order extends Model
         return self::$types;
     }
 
-    
+    /**
+     * Check for type existence in list
+     *
+     * @param string $type Name of type
+     * @return bool
+     */
     public static function correctType($type)
     {
         return array_key_exists($type, self::$types);
@@ -81,20 +98,6 @@ class Order extends Model
         }
 
         return 'Неправильний ключ типу';
-    }
-
-
-    public function state()    //TODO: Add similar function for getting state code
-    {
-        if($this->ready) {
-            if( !is_null($this->issued_at)) {
-                return 'Видана';
-            }
-
-            return 'Очікує видачі';
-        }
-
-        return 'В черзі';
     }
 
     /**

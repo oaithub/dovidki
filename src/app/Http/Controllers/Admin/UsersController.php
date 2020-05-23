@@ -37,6 +37,6 @@ class UsersController extends Controller
         abort_if(empty($user), 404);
         $paginator = $this->orderRepository->getAllByUserIdWithPaginate($id);
 
-        return view('users.profile', compact('user', 'paginator'));
+        return view('admin.users.show', compact('user', 'paginator'));
     }
 }
