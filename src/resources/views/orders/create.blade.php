@@ -20,8 +20,8 @@
         </div>
 
         <div class="form-group">
-            <label for="user_group">Ваша група:</label>
-            <select class="form-control" name="user_group" required>
+            <label for="group">Ваша група:</label>
+            <select class="form-control" name="group" required>
                 <option value="" hidden>Виберіть</option>
                 @foreach($groups as $id => $groupInfo)
                     <option value="{{ $id }}">{{ $groupInfo->specialty }}, {{ $groupInfo->year }} курс</option>

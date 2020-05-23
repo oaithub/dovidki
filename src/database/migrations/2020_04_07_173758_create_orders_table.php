@@ -18,7 +18,7 @@ class CreateOrdersTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->json('group');
             $table->string('type');
-            $table->string('state');
+            $table->string('state')->default('in-queue');
             $table->string('response_message')->nullable()->default(null);
             $table->timestamp('period_from')->nullable();
             $table->timestamp('period_to')->nullable();

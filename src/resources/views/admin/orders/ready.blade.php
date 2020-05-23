@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Невидані заяви')
+@section('title', 'Не видані заяви')
 
 @section('content')
 
