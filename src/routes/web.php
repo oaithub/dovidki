@@ -20,6 +20,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/orders/create', 'OrdersController@create')->name('order:create');    //User order create form
     Route::post('/orders', 'OrdersController@store');    //User new orders saving
+    Route::get('/orders/{id}', 'OrdersController@show')->name('order:show');    //User order full view
 
 
     Route::get('/profile', 'UsersController@current')->name('user:profile');    //User profile view

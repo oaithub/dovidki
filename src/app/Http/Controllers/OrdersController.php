@@ -24,6 +24,8 @@ class OrdersController extends Controller
         $order = $this->orderRepository->getForShow($id);
         abort_if(empty($order), 404);
 
+        $this->authorize('view', $order);
+
         return view('orders.show', compact('order'));
     }
 
