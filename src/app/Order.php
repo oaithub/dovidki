@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 class Order extends Model
 {
@@ -27,6 +28,7 @@ class Order extends Model
         'group',
         'type',
         'state',
+        'response_message',
         'period_from',
         'period_to',
     ];
@@ -55,13 +57,23 @@ class Order extends Model
     ];
 
     /**
+     * Return collection of all order states
+     *
+     * @return Collection
+     */
+    public static function stateList()
+    {
+        return collect(self::$states);
+    }
+
+    /**
      * Return collection of all order types
      *
-     * @return array
+     * @return Collection
      */
     public static function typeList()
     {
-        return self::$types;
+        return collect(self::$types);
     }
 
     /**

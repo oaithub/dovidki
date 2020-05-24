@@ -3,12 +3,11 @@
 namespace App\Http\Requests;
 
 use App\Order;
-use Auth;
-use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
+use Auth;
 use Illuminate\Validation\Rule;
 
-class OrderCreateRequest extends FormRequest
+class OrderUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,14 +26,10 @@ class OrderCreateRequest extends FormRequest
      */
     public function rules()
     {
-        $correctGroups = Auth::user()->groups()->keys();
-        $correctTypes = Order::typeList()->keys();
-        $dateRules = 'required|date|after:'.now()->subYears(6)->format('M Y');
+        $correctStates = Order::stateList()->keys();
         return [
-            'group' => ['required', Rule::in($correctGroups)],
-            'type' => ['required', Rule::in($correctTypes)],
-            'period_from' => $dateRules,
-            'period_to' => $dateRules,
+            'state' => ['required', Rule::in($correctStates)],
+            'response_message' => 'required|string|max:700',
         ];
     }
 }

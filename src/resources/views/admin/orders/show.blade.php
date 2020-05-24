@@ -4,22 +4,91 @@
 
 @section('content')
 
-    <header>
-        <h1>Замовлення #{{ $order->id }}</h1>
-    </header>
+    <!-- MAIN COLUMN START -->
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            @include('layouts._errors')
+            <div class="card">
+                <div class="card-header">
+                    <h2>Замовлення #{{ $order->id }} - @include('layouts._orderState', ['stateCode' => $order->state])</h2>
+                </div>
+                <!-- CARDBODY START -->
+                <div class="card-body">
+                    {{-- Деталі замовлення --}}
+                    @include('admin.orders.includes.order-info')
 
-    <div>
-        <h4>
-            @include('layouts._orderState', ['stateCode' => $order->state])
-        </h4>
+                    @if($order->state == 'in-queue' or $order->state == 'wait-for-issue')
+                        <ul class="nav nav-tabs" role="tablist">
+                            @if($order->state == 'in-queue')
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#order-ready" role="tab">Замовлення готове</a>
+                                </li>
+                            @endif
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#order-issued" role="tab">Замовлення видане</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#order-canceled" role="tab">Замовлення відмінене</a>
+                            </li>
+                        </ul>
+                        <br>
+                        <div class="tab-content">
 
-        <p>
-            <a href="{{ route('manager:user_profile', $order->user->id ) }}">{{ $order->user->name }}</a><br>
-            {{ $order->group->specialty }}, {{ $order->group->year }} курс<br>
-            Тип довідки - {{ $order->type }}<br>
-            В період від {{ $order->period_from->format('m-Y') }} до {{ $order->period_to->format('m-Y') }}<br>
-            Створена - {{ $order->created_at }}<br>
-        </p>
+                            @if($order->state == 'in-queue')
+                                <!-- ORDER-READY TOGGLE START -->
+                                <div class="tab-pane" id="order-ready" role="tabpanel">
+                                    <form action="{{ route('manager:order_update', $order->id) }}" method="POST">
+                                        @csrf
+                                        @method('PATCH')
+                                        <input type="hidden" name="state" value="wait-for-issue">
+                                        <div class="form-group">
+                                            <label for="response_message">Інформація для користувача</label>
+                                            <textarea name="response_message" id="response_message" rows="8" class="form-control">{{ old('response_message', $order->response_message) }}</textarea>
+                                        </div>
+                                        <input class="btn btn-warning form-control" type="submit" value='Позначити як "Готове до видачі"'>
+                                    </form>
+                                </div>
+                                <!-- ORDER-READY TOGGLE END -->
+                            @endif
+
+                            <!-- ORDER-ISSUED TOGGLE START -->
+                            <div class="tab-pane active" id="order-issued" role="tabpanel">
+                                <form action="{{ route('manager:order_update', $order->id) }}" method="POST">
+                                    @csrf
+                                    @method('PATCH')
+                                    <input type="hidden" name="state" value="issued">
+                                    <div class="form-group">
+                                        <label for="response_message">Інформація для користувача</label>
+                                        <textarea name="response_message" id="response_message" rows="8" class="form-control">{{ old('response_message', $order->response_message) }}</textarea>
+                                    </div>
+                                    <input class="btn btn-success form-control" type="submit" value='Позначити як "Видане"'>
+                                </form>
+                            </div>
+                            <!-- ORDER-ISSUED TOGGLE END -->
+
+                            <!-- ORDER-CANCELED TOGGLE START -->
+                            <div class="tab-pane" id="order-canceled" role="tabpanel">
+                                <form action="{{ route('manager:order_update', $order->id) }}" method="POST">
+                                    @csrf
+                                    @method('PATCH')
+                                    <input type="hidden" name="state" value="canceled-by-manager">
+                                    <div class="form-group">
+                                        <label for="response_message">Причина відміни</label>
+                                        <textarea name="response_message" id="response_message" rows="8" class="form-control">{{ old('response_message', $order->response_message) }}</textarea>
+                                    </div>
+                                    <input class="btn btn-danger form-control" type="submit" value='Позначити як "Відмінене"'>
+                                </form>
+                            </div>
+                            <!-- ORDER-CANCELED TOGGLE END -->
+
+                        </div>
+                    @endif
+                </div>
+                <!-- CARDBODY END -->
+            </div>
+        </div>
     </div>
+    <!-- MAIN COLUMN END -->
+
 
 @endsection

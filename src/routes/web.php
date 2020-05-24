@@ -34,7 +34,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/orders/issued', 'Admin\OrdersController@issued')->name('manager:orders_issued');    //Manager all issued orders
         Route::get('/orders/ready', 'Admin\OrdersController@ready')->name('manager:orders_ready');    //Manager all ready orders
         Route::get('/orders/{id}', 'Admin\OrdersController@show')->name('manager:order');    //Manager orders view
-        //Route::get('/manager/{order}/review', 'OrdersController@edit');    //Manager orders review form
+        Route::patch('/manager/orders/{order}', 'Admin\OrdersController@update')->name('manager:order_update');    //Manager orders update
 
     });
 
