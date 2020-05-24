@@ -26,6 +26,13 @@ class OrdersController extends Controller
         return view('admin.orders.index', compact('paginator'));
     }
 
+    public function inQueue()
+    {
+        $paginator = $this->orderRepository->getInQueuedWithPaginate(15);
+
+        return view('admin.orders.in-queue', compact('paginator'));
+    }
+
     public function issued()
     {
         $paginator = $this->orderRepository->getIssuedWithPaginate(15);

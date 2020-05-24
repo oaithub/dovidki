@@ -26,8 +26,9 @@ class Order extends Model
         'user_id',
         'group',
         'type',
+        'state',
         'period_from',
-        'period_to'
+        'period_to',
     ];
 
     /**
@@ -64,14 +65,13 @@ class Order extends Model
     }
 
     /**
-     * Check for type existence in list
+     * Return default order state after creating.
      *
-     * @param string $type Name of type
-     * @return bool
+     * @return string
      */
-    public static function correctType($type)
+    public static function getDefaultState()
     {
-        return array_key_exists($type, self::$types);
+        return 'in-queue';
     }
 
     /**

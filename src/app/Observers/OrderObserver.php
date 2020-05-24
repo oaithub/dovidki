@@ -26,6 +26,7 @@ class OrderObserver
      */
     public function creating(Order $order)
     {
+        $this->setDefaultState($order);
         $this->setGroup($order);
         $this->setUserId($order);
     }
@@ -39,6 +40,11 @@ class OrderObserver
     public function updated(Order $order)
     {
         //
+    }
+
+    protected function setDefaultState(Order $order)
+    {
+        $order->state = Order::getDefaultState();
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Order;
 use Auth;
+use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -28,9 +29,12 @@ class OrderCreateRequest extends FormRequest
     {
         $correctGroups = Auth::user()->groups()->keys();
         $correctTypes = array_keys(Order::typeList());
+        $dateRules = 'required|date|after:'.now()->subYears(6)->format('M Y');
         return [
             'group' => ['required', Rule::in($correctGroups)],
             'type' => ['required', Rule::in($correctTypes)],
+            'period_from' => $dateRules,
+            'period_to' => $dateRules,
         ];
     }
 }

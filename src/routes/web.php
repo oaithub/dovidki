@@ -28,7 +28,9 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/users', 'Admin\UsersController@index')->name('manager:users_all');    //Manager profiles view
         Route::get('/users/{id}', 'Admin\UsersController@show')->name('manager:user_profile');    //Manager profiles view
+
         Route::get('/orders', 'Admin\OrdersController@index')->name('manager:orders_all');    //Manager all orders view
+        Route::get('/orders/in-queue', 'Admin\OrdersController@inQueue')->name('manager:orders_in_queue');    //Manager all issued orders
         Route::get('/orders/issued', 'Admin\OrdersController@issued')->name('manager:orders_issued');    //Manager all issued orders
         Route::get('/orders/ready', 'Admin\OrdersController@ready')->name('manager:orders_ready');    //Manager all ready orders
         Route::get('/orders/{id}', 'Admin\OrdersController@show')->name('manager:order');    //Manager orders view

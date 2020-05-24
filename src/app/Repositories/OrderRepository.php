@@ -80,6 +80,27 @@ class OrderRepository extends CoreRepository
      * @param int $count Orders per page
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
+    public function getInQueuedWithPaginate($count = 25)
+    {
+        $columns = ['id', 'user_id', 'group', 'type', 'state', 'response_message', 'user_id',];
+
+        $result = $this->startConditions()
+            ->select($columns)
+            ->oldest('id')
+            ->where('state', 'in-queue')
+            ->oldest('id')
+            ->with(['user:id,name'])
+            ->paginate($count);
+
+        return $result;
+    }
+
+    /**
+     * Return collection of ready orders for list with pagination
+     *
+     * @param int $count Orders per page
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
     public function getIssuedWithPaginate($count = 25)
     {
         $columns = ['id', 'user_id', 'group', 'type', 'state', 'response_message', 'user_id',];
