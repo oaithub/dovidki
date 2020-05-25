@@ -50,7 +50,7 @@ class OrdersController extends Controller
 
         if ($item) {
             return redirect()
-                ->route('home')
+                ->route('user:profile')
                 ->with(['success' => 'Успішно збережено']);
         } else {
             return back()

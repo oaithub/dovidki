@@ -1,6 +1,8 @@
-@extends('layouts/app')
+@extends('admin.layouts.admin-core')
 
-@section('content')
+@section('title', 'Профіль користувача')
+
+@section('admin-content')
 
     <h1>{{ $user->name }}</h1>
     <div>

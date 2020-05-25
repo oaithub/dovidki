@@ -1,4 +1,5 @@
 @if($paginator)
+    @include('layouts._pagination')
     <table class="table table-hover">
         <thead>
         <tr>
@@ -21,12 +22,5 @@
         @endforeach
         </tbody>
     </table>
-    @if($paginator->total() > $paginator->count())
-        <br>
-        <div class="row justify-content-center">
-            <div class="col-md-12">
-                {{ $paginator->links() }}
-            </div>
-        </div>
-    @endif
+    @include('layouts._pagination')
 @endif

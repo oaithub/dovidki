@@ -1,9 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.user-core')
 
 @section('title', 'Створення заяви')
 
-@section('content')
-    {{-- TODO: Delete group and name fields, or change to read-only fields --}}
+@section('user-content')
 
     <header>
         <h1>Створення заяви</h1>
@@ -11,7 +10,7 @@
 
     @include('layouts._errors')
 
-    <form action="/orders" method="POST">
+    <form action="{{ route('order:store') }}" method="POST">
         @csrf
 
         <div class="form-group">

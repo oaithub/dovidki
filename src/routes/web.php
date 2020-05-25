@@ -19,7 +19,7 @@ Route::middleware('auth')->group(function () {
         ->name('home');    //Redirect common user to his profile, manager to control panel
 
     Route::get('/orders/create', 'OrdersController@create')->name('order:create');    //User order create form
-    Route::post('/orders', 'OrdersController@store');    //User new orders saving
+    Route::post('/orders', 'OrdersController@store')->name('order:store');    //User new orders saving
     Route::get('/orders/{id}', 'OrdersController@show')->name('order:show');    //User order full view
 
 

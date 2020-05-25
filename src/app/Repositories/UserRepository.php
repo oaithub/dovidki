@@ -27,6 +27,7 @@ class UserRepository extends CoreRepository
 
         $result = $this->startConditions()
             ->select($columns)
+            ->withCount('orders')
             ->oldest('id')
             ->paginate($count);
 

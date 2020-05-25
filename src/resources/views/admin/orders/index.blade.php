@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('admin.layouts.admin-core')
 
 @section('title', 'Усі заяви')
 
-@section('content')
+@section('admin-content')
 
-    <header>
+    <header class="mb-2">
         <h1>Усі заяви</h1>
     </header>
 
