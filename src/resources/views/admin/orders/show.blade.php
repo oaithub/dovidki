@@ -1,8 +1,8 @@
-@extends('layouts.app')
+@extends('admin.layouts.admin-core')
 
 @section('title', 'Перегляд заяви')
 
-@section('content')
+@section('admin-content')
 
     <!-- MAIN COLUMN START -->
     <div class="row justify-content-center">
@@ -16,6 +16,8 @@
                 <div class="card-body">
                     {{-- Деталі замовлення --}}
                     @include('admin.orders.includes.order-info')
+
+                    <hr>
 
                     @if($order->state == 'in-queue' or $order->state == 'wait-for-issue')
                         <ul class="nav nav-tabs" role="tablist">

@@ -1,11 +1,11 @@
-@extends('layouts.app')
+@extends('admin.layouts.admin-core')
 
 @section('title', 'Видані заяви')
 
-@section('content')
+@section('admin-content')
 
-    <header>
-        <h1>Видані заяви</h1>
+    <header class="mb-2">
+        <h1 class="text-success">Видані заяви</h1>
     </header>
 
     @include('layouts._order-list-stateless')

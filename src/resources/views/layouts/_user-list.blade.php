@@ -5,8 +5,7 @@
             <th scope="col">#id</th>
             <th scope="col">Ім'я студента</th>
             <th scope="col">E-Mail</th>
-            <th scope="col">Щось</th>
-            <th scope="col">Ще щось</th>
+            <th scope="col">Кількість замовлень</th>
             <th scope="col">Профіль</th>
         </tr>
         </thead>
@@ -16,8 +15,7 @@
                 <th scope="row">{{ $user->id }}</th>
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
-                <td>Має бути щось</td>
-                <td>А тут ще щось</td>
+                <td>{{ $user->orders_count }}</td>
                 <td><a href="{{ route('manager:user_profile', $user->id) }}" class="btn btn-info btn-sm active" role="button" aria-pressed="true">Перегляд</a></td>
             </tr>
         @endforeach

@@ -1,11 +1,18 @@
 @if( $errors->any() )
 
-    <ul class="list-group mt-2 mb-2">
+<div class="row justify-content-center">
+    <div class="col-md-12">
     @foreach($errors->all() as $error)
 
-        <li class="list-group-item list-group-item-danger ">{{ $error }}</li>
+            <div class="alert alert-danger" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{ $error }}
+            </div>
 
     @endforeach
-    </ul>
+    </div>
+</div>
 
 @endif

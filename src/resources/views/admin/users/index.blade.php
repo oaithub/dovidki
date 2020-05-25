@@ -1,8 +1,8 @@
-@extends('layouts.app')
+@extends('admin.layouts.admin-core')
 
 @section('title', 'Усі заяви')
 
-@section('content')
+@section('admin-content')
 
     <header>
         <h1>Усі користувачі</h1>

@@ -1,11 +1,11 @@
-@extends('layouts.app')
+@extends('admin.layouts.admin-core')
 
-@section('title', 'Не видані заяви')
+@section('title', 'Очікують на видачу')
 
-@section('content')
+@section('admin-content')
 
-    <header>
-        <h1>Очікують на видачу</h1>
+    <header class="mb-2">
+        <h1 class="text-warning">Очікують на видачу</h1>
     </header>
 
     @include('layouts._order-list-stateless')
