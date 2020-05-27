@@ -2,8 +2,11 @@
 
 namespace App\Observers;
 
+use App\Mail\OrderCreated;
+use App\Mail\OrderStateUpdated;
 use App\Order;
 use Auth;
+use Illuminate\Support\Facades\Mail;
 
 class OrderObserver
 {
@@ -15,7 +18,8 @@ class OrderObserver
      */
     public function created(Order $order)
     {
-        //TODO: Send mail
+        Mail::to($order->user->email)
+            ->send(new OrderCreated($order));
     }
 
     /**
@@ -39,7 +43,8 @@ class OrderObserver
      */
     public function updated(Order $order)
     {
-        //
+        Mail::to($order->user->email)
+            ->send(new OrderStateUpdated($order));
     }
 
     protected function setDefaultState(Order $order)

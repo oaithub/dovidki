@@ -66,6 +66,15 @@ class Order extends Model
         return collect(self::$states);
     }
 
+    public function stateNameOrError()
+    {
+        if(array_key_exists($this->state, self::$states)) {
+            return self::$states[$this->state];
+        }
+
+        return 'Неправильний ключ стану';
+    }
+
     /**
      * Return collection of all order types
      *
