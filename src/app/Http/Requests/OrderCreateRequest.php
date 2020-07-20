@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Order;
+use App\Models\Order;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;

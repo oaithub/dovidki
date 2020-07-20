@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Order as Model;
+use App\Models\Order as Model;
 use Illuminate\Database\Eloquent\Collection;
 
 /**

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\OrderCreateRequest;
-use App\Order;
+use App\Models\Order;
 use App\Repositories\OrderRepository;
 use Auth;
 

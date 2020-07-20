@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\OrderUpdateRequest;
 use App\Repositories\OrderRepository;
 use Illuminate\Http\Request;
-use App\Order;
 
 class OrdersController extends Controller
 {

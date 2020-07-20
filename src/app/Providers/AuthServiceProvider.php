@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Order;
+use App\Models\Order;
 use App\Policies\OrderPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;

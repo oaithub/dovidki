@@ -4,7 +4,7 @@ namespace App\Observers;
 
 use App\Mail\OrderCreated;
 use App\Mail\OrderStateUpdated;
-use App\Order;
+use App\Models\Order;
 use Auth;
 use Illuminate\Support\Facades\Mail;
 
@@ -13,7 +13,7 @@ class OrderObserver
     /**
      * Handle the order "created" event.
      *
-     * @param \App\Order $order
+     * @param \App\Models\Order $order
      * @return void
      */
     public function created(Order $order)
@@ -38,7 +38,7 @@ class OrderObserver
     /**
      * Handle the order "updated" event.
      *
-     * @param \App\Order $order
+     * @param \App\Models\Order $order
      * @return void
      */
     public function updated(Order $order)
@@ -74,7 +74,7 @@ class OrderObserver
     /**
      * Handle the order "deleted" event.
      *
-     * @param  \App\Order  $order
+     * @param  \App\Models\Order  $order
      * @return void
      */
     public function deleted(Order $order)
@@ -85,7 +85,7 @@ class OrderObserver
     /**
      * Handle the order "restored" event.
      *
-     * @param  \App\Order  $order
+     * @param  \App\Models\Order  $order
      * @return void
      */
     public function restored(Order $order)
@@ -96,7 +96,7 @@ class OrderObserver
     /**
      * Handle the order "force deleted" event.
      *
-     * @param  \App\Order  $order
+     * @param  \App\Models\Order  $order
      * @return void
      */
     public function forceDeleted(Order $order)
