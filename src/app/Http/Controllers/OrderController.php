@@ -7,7 +7,7 @@ use App\Models\Order;
 use App\Repositories\OrderRepository;
 use Auth;
 
-class OrdersController extends Controller
+class OrderController extends Controller
 {
     /**
      * @var OrderRepository

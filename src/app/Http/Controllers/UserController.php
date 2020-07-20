@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Repositories\OrderRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
+use Auth;
 
-class UsersController extends Controller
+class UserController extends Controller
 {
 
     /**
@@ -25,18 +25,13 @@ class UsersController extends Controller
         $this->userRepository = app(UserRepository::class);
     }
 
-    public function index() {
-        $paginator = $this->userRepository->getAllWithPaginate(35);
-
-        return view('admin.users.index', compact('paginator'));
-    }
-
-    public function show($id)
+    public function current()
     {
+        $id = Auth::id();
         $user = $this->userRepository->getForShow($id);
         abort_if(empty($user), 404);
         $paginator = $this->orderRepository->getAllByUserIdWithPaginate($id);
 
-        return view('admin.users.show', compact('user', 'paginator'));
+        return view('users.profile', compact('user', 'paginator'));
     }
 }

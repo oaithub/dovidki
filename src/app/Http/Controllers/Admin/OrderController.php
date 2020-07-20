@@ -7,7 +7,7 @@ use App\Http\Requests\OrderUpdateRequest;
 use App\Repositories\OrderRepository;
 use Illuminate\Http\Request;
 
-class OrdersController extends Controller
+class OrderController extends Controller
 {
     /**
      * @var OrderRepository
