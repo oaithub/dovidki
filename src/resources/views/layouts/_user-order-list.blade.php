@@ -18,7 +18,7 @@
                 <td>
                     @include('layouts._orderState', ['stateCode' => $order->state])
                 </td>
-                <td><a href="{{ route('order:show', $order->id) }}" class="btn btn-info btn-sm active" role="button" aria-pressed="true">Перегляд</a></td>
+                <td><a href="{{ route('order.show', $order->id) }}" class="btn btn-info btn-sm active" role="button" aria-pressed="true">Перегляд</a></td>
             </tr>
         @endforeach
         </tbody>

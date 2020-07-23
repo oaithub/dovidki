@@ -16,7 +16,7 @@
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->orders_count }}</td>
-                <td><a href="{{ route('manager:user_profile', $user->id) }}" class="btn btn-info btn-sm active" role="button" aria-pressed="true">Перегляд</a></td>
+                <td><a href="{{ route('admin.user.show', $user->id) }}" class="btn btn-info btn-sm active" role="button" aria-pressed="true">Перегляд</a></td>
             </tr>
         @endforeach
         </tbody>

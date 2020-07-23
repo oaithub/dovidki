@@ -12,7 +12,7 @@
                 @if(Auth::user()->isManager())
                 <a class="dropdown-item" href="{{ route('home') }}">Панель менеджера</a>
                 @endif
-                <a class="dropdown-item" href="{{ route('user:profile') }}">Профіль</a>
+                <a class="dropdown-item" href="{{ route('user.profile') }}">Профіль</a>
                 <a class="dropdown-item" href="{{ route('logout') }}">Вихід</a>
             </div>
         </li>

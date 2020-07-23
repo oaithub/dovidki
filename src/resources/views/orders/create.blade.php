@@ -10,7 +10,7 @@
 
     @include('layouts._errors')
 
-    <form action="{{ route('order:store') }}" method="POST">
+    <form action="{{ route('order.store') }}" method="POST">
         @csrf
 
         <div class="form-group">

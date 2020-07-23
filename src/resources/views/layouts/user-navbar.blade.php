@@ -4,10 +4,10 @@
             <a class="nav-link text-white font-weight-bold" href="{{ route('home') }}">Головна</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-white" href="{{ route('user:profile') }}">Профіль</a>
+            <a class="nav-link text-white" href="{{ route('user.profile') }}">Профіль</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-white" href="{{ route('order:create') }}">Створити заяву</a>
+            <a class="nav-link text-white" href="{{ route('order.create') }}">Створити заяву</a>
         </li>
     </ul>
     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
@@ -22,7 +22,7 @@
                 @if(Auth::user()->isManager())
                     <a class="dropdown-item" href="{{ route('home') }}">Панель менеджера</a>
                 @endif
-                <a class="dropdown-item" href="{{ route('user:profile') }}">Профіль</a>
+                <a class="dropdown-item" href="{{ route('user.profile') }}">Профіль</a>
                 <a class="dropdown-item" href="{{ route('logout') }}">Вихід</a>
             </div>
         </li>

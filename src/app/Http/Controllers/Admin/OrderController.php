@@ -96,7 +96,7 @@ class OrderController extends Controller
 
         if ($item) {
             return redirect()
-                ->route('manager:order', $item->id)
+                ->route('admin.order.show', $item->id)
                 ->with(['success' => 'Успішно збережено']);
         } else {
             return back()
