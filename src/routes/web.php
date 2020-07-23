@@ -35,8 +35,14 @@ Route::middleware('auth')->group(function () {
         Route::get('/orders/issued', 'Admin\OrderController@issued')->name('manager:orders_issued');    //Manager all issued orders
         Route::get('/orders/ready', 'Admin\OrderController@ready')->name('manager:orders_ready');    //Manager all ready orders
         Route::get('/orders/{id}', 'Admin\OrderController@show')->name('manager:order');    //Manager orders view
-        Route::patch('/manager/orders/{order}', 'Admin\OrderController@update')->name('manager:order_update');    //Manager orders update
+        Route::patch('/orders/{order}', 'Admin\OrderController@update')->name('manager:order_update');    //Manager orders update
 
+        Route::resource('roles', 'Admin\RoleController')
+            ->except(['create', 'edit'])
+            ->names('admin.role');
+        Route::resource('permissions', 'Admin\PermissionController')
+            ->only(['index', 'show'])
+            ->names('admin.permission');
     });
 
 });
