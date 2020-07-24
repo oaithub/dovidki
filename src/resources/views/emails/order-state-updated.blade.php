@@ -5,7 +5,7 @@
 Переглянути деталі замовлення Ви можете на сторінці свого профілю.
 
 
-@component('mail::button', ['url' => route('order:show', $order->id)])
+@component('mail::button', ['url' => route('order.show', $order->id)])
     Переглянути замовлення
 @endcomponent
 

@@ -39,7 +39,7 @@
                             @if($order->state == 'in-queue')
                                 <!-- ORDER-READY TOGGLE START -->
                                 <div class="tab-pane" id="order-ready" role="tabpanel">
-                                    <form action="{{ route('manager:order_update', $order->id) }}" method="POST">
+                                    <form action="{{ route('admin.order.update', $order->id) }}" method="POST">
                                         @csrf
                                         @method('PATCH')
                                         <input type="hidden" name="state" value="wait-for-issue">
@@ -55,7 +55,7 @@
 
                             <!-- ORDER-ISSUED TOGGLE START -->
                             <div class="tab-pane active" id="order-issued" role="tabpanel">
-                                <form action="{{ route('manager:order_update', $order->id) }}" method="POST">
+                                <form action="{{ route('admin.order.update', $order->id) }}" method="POST">
                                     @csrf
                                     @method('PATCH')
                                     <input type="hidden" name="state" value="issued">
@@ -70,7 +70,7 @@
 
                             <!-- ORDER-CANCELED TOGGLE START -->
                             <div class="tab-pane" id="order-canceled" role="tabpanel">
-                                <form action="{{ route('manager:order_update', $order->id) }}" method="POST">
+                                <form action="{{ route('admin.order.update', $order->id) }}" method="POST">
                                     @csrf
                                     @method('PATCH')
                                     <input type="hidden" name="state" value="canceled-by-manager">

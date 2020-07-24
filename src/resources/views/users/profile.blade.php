@@ -26,7 +26,7 @@
     </div>
 
     <div class="mt-2 mb-2">
-        <a href="{{ route('order:create') }}"><button type="button" class="btn btn-primary btn-lg">Створити заявку</button></a>
+        <a href="{{ route('order.create') }}"><button type="button" class="btn btn-primary btn-lg">Створити заявку</button></a>
     </div>
     @include('layouts._user-order-list')
 

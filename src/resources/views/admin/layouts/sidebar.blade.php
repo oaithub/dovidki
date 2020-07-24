@@ -9,6 +9,10 @@
         <a href="{{ route('admin.order.issued') }}" class="sidebar-subitem list-group-item bg-dark text-white">Видані</a>
 
         <a href="{{ route('admin.user.index') }}" class="list-group-item bg-dark text-white">Користувачі</a>
+
+        <a href="{{ route('admin.role.index') }}" class="list-group-item bg-dark text-white">Ролі</a>
+        <a href="{{ route('admin.permission.index') }}" class="list-group-item bg-dark text-white">Дозволи</a>
+
     </div>
 </div>
 <!-- Sidebar End -->
