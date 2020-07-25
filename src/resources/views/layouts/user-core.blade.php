@@ -9,6 +9,8 @@
     @include('layouts.user-navbar')
 
     <div class="container mt-4">
+        @include('layouts._notifications')
+
         @yield('user-content')
     </div>
 @endsection

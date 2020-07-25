@@ -14,6 +14,8 @@
 
         <!-- Page Content Start -->
         <div class="container-fluid mt-4 mb-2">
+            @include('layouts._notifications')
+
             @yield('admin-content')
         </div>
             <!-- Page Content End -->

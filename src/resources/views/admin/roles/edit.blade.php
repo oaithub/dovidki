@@ -3,7 +3,6 @@
 @section('title', 'Редагування ролі')
 
 @section('admin-content')
-    @include('layouts._errors')
 
     <form method="POST" action="{{ route('admin.role.update', $role->id) }}" >
         @csrf

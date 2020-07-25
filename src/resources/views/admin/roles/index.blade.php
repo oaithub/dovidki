@@ -8,8 +8,6 @@
         <h1>Усі ролі</h1>
     </header>
 
-    @include('layouts._errors')
-
     <form action="{{ route('admin.role.store') }}" method="POST">
         @csrf
         <div class="form-row">

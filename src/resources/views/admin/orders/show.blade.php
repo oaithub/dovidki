@@ -7,10 +7,9 @@
     <!-- MAIN COLUMN START -->
     <div class="row justify-content-center">
         <div class="col-md-12">
-            @include('layouts._errors')
             <div class="card">
                 <div class="card-header">
-                    <h2>Замовлення #{{ $order->id }} - @include('layouts._orderState', ['stateCode' => $order->state])</h2>
+                    <h2>Замовлення #{{ $order->id }} - @include('orders.includes._orderState', ['stateCode' => $order->state])</h2>
                 </div>
                 <!-- CARDBODY START -->
                 <div class="card-body">

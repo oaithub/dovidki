@@ -8,8 +8,6 @@
         <h1>Створення заяви</h1>
     </header>
 
-    @include('layouts._errors')
-
     <form action="{{ route('order.store') }}" method="POST">
         @csrf
 

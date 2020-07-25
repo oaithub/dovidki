@@ -19,6 +19,6 @@
             Усі заяви студента
         </h2>
 
-        @include('layouts._order-list')
+        @include('orders.includes._order-list')
     </div>
 @endsection

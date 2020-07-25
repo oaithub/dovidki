@@ -8,6 +8,6 @@
         <h1 class="text-primary">В черзі</h1>
     </header>
 
-    @include('layouts._order-list-stateless')
+    @include('orders.includes._order-list', ['showState' => false])
 
 @endsection
