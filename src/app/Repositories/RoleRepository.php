@@ -16,12 +16,12 @@ class RoleRepository extends CoreRepository
     }
 
     /**
-     * Return collection of orders for list with pagination
+     * Return collection of roles for list with pagination
      *
-     * @param int $count Orders per page
+     * @param int $count Roles per page
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getAllWithPaginate($count = 25)
+    public function getAllWithPaginate($count = 25)    //TODO: add toBase() method to all repositories
     {
         $columns = ['id', 'name',];
 
@@ -34,20 +34,23 @@ class RoleRepository extends CoreRepository
     }
 
     /**
-     * Return one order for edit
+     * Return one role for edit
      *
-     *  @param int $id Target order id
+     *  @param int $id Target role id
      *  @return Model
      */
     public function getForEdit($id)
     {
-        return $this->startConditions()->find($id);
+        return $this->startConditions()
+            ->where('id', $id)
+            ->with(['permissions:id,name'])
+            ->first();
     }
 
     /**
-     * Return one order for show
+     * Return one role for show
      *
-     * @param int $id Target order id
+     * @param int $id Target role id
      * @return Model
      */
     public function getForShow($id) {

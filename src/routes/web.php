@@ -39,7 +39,7 @@ Route::middleware('auth')->group(function () {
             ->names('admin.order');
 
         Route::resource('roles', 'Admin\RoleController')
-            ->except(['create', 'edit'])
+            ->except(['create'])
             ->names('admin.role');
         Route::resource('permissions', 'Admin\PermissionController')
             ->only(['index', 'show'])

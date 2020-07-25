@@ -23,12 +23,30 @@ class PermissionRepository extends CoreRepository
      */
     public function getAllWithPaginate($count = 10)
     {
-        $columns = ['id', 'name',];
+        $columns = ['id', 'name'];
 
         $result = $this->startConditions()
             ->select($columns)
             //->with('roles:id,name')
+            ->toBase()
             ->paginate($count);
+
+        return $result;
+    }
+
+    /**
+     * Return collection of all permissions
+     *
+     * @return mixed
+     */
+    public function getAllForList()
+    {
+        $columns = ['id', 'name'];
+
+        $result = $this->startConditions()
+            ->select($columns)
+            ->toBase()
+            ->get();
 
         return $result;
     }

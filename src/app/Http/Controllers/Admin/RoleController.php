@@ -4,12 +4,18 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RoleCreateRequest;
+use App\Http\Requests\RoleUpdateRequest;
+use App\Repositories\PermissionRepository;
 use App\Repositories\RoleRepository;
-use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
+
+    /**
+     * @var PermissionRepository
+     */
+    private $permissionRepository;
 
     /**
      * @var RoleRepository
@@ -21,6 +27,7 @@ class RoleController extends Controller
      */
     public function __construct()
     {
+        $this->permissionRepository = app(PermissionRepository::class);
         $this->roleRepository = app(RoleRepository::class);
     }
 
@@ -42,7 +49,7 @@ class RoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(RoleCreateRequest $request)
+    public function store(RoleCreateRequest $request)    //TODO: Add error and success notifications
     {
         $name = $request->name;
         $role = Role::create(['name' => $name]);
@@ -59,8 +66,26 @@ class RoleController extends Controller
     public function show($id)
     {
         $role = $this->roleRepository->getForShow($id);
+        abort_if(empty($role), 404);
 
         return view('admin.roles.show', compact('role'));
+    }
+
+    /**
+     * Display a form for editing role
+     *
+     * @param $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function edit($id)
+    {
+        $role = $this->roleRepository->getForEdit($id);
+        abort_if(empty($role), 404);
+
+        $allPermissions = $this->permissionRepository->getAllForList();
+        $rolePermissions = $role->permissions->pluck('id', 'id');
+
+        return view('admin.roles.edit', compact('role', 'allPermissions', 'rolePermissions'));
     }
 
     /**
@@ -70,9 +95,17 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(RoleUpdateRequest $request, $id)
     {
-        dd(__method__);
+        $role = $this->roleRepository->getForEdit($id);
+        abort_if(empty($role), 404);
+
+        $role->name = $request->input('name');
+        $role->save();
+
+        $role->syncPermissions($request->input('permission'));
+
+        //return back();
     }
 
     /**
@@ -81,7 +114,7 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id)    //TODO
     {
         dd(__method__);
     }
