@@ -4,10 +4,14 @@
 
 @section('admin-content')
 
-    <header class="mb-2">
-        <h1>Усі заяви</h1>
-    </header>
+    <div class="card">
+        <div class="card-header">
+            <h2>Усі заяви</h2>
+        </div>
 
-    @include('orders.includes._order-list')
+        <div class="card-body">
+            @include('orders.includes._order-list')
+        </div>
+    </div>
 
 @endsection

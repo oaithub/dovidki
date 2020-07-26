@@ -4,10 +4,15 @@
 
 @section('admin-content')
 
-    <header class="mb-2">
-        <h1 class="text-primary">В черзі</h1>
-    </header>
 
-    @include('orders.includes._order-list', ['showState' => false])
+    <div class="card">
+        <div class="card-header">
+            <h2 class="text-primary">В черзі</h2>
+        </div>
+
+        <div class="card-body">
+            @include('orders.includes._order-list', ['showState' => false])
+        </div>
+    </div>
 
 @endsection
