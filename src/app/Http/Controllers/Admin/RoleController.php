@@ -105,7 +105,7 @@ class RoleController extends Controller
 
         $role->syncPermissions($request->input('permission'));
 
-        //return back();
+        return back();
     }
 
     /**

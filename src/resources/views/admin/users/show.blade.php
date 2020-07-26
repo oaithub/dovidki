@@ -4,21 +4,29 @@
 
 @section('admin-content')
 
-    <h1>{{ $user->name }}</h1>
-    <div>
-        @if($user->isManager())
-            <h4 class="text-warning">Права доступу менеджера</h4>
-        @else
-            <h4 class="text-danger">Права менеджера недоступні</h4>
-        @endif
-        e-mail: {{ $user->email }}
-    </div>
+    <div class="card">
+        <div class="card-header">
+            <h2>{{ $user->name }}</h2>
+            <div class="form-text text-muted">{{ $user->email }}</div>
+        </div>
 
-    <div class="mt-4">
-        <h2>
-            Усі заяви студента
-        </h2>
+        <div class="card-body">
+            <div class="continer row mt-3">
+                <div class="col-md">
+                    <h3>Активні ролі:</h3>
+                    @include('admin.roles.includes._role-list', ['roles' => $roles])
+                </div>
+            </div>
 
-        @include('orders.includes._order-list')
+            <hr>
+
+            <div class="mt-4">
+                <h2>
+                    Усі заяви студента
+                </h2>
+
+                @include('orders.includes._order-list')
+            </div>
+        </div>
     </div>
 @endsection

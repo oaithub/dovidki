@@ -21,28 +21,6 @@
         </div>
     </form>
 
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th scope="col">#id</th>
-            <th scope="col">Назва</th>
-            <th scope="col">Опис</th>
-            <th scope="col"></th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach($paginator as $role)
-            <tr>
-                <th scope="row">{{ $role->id }}</th>
-                <td>{{ $role->name }}</td>
-                <td>Можливо опис</td>
-                <td>
-                    <a href="{{ route('admin.role.show', $role->id) }}" class="btn btn-info btn-sm" role="button" aria-pressed="true">Переглянути</a>
-                    <a href="{{ route('admin.role.edit', $role->id) }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true">Редагувати</a>
-                </td>
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
+    @include('admin.roles.includes._role-list', ['roles' => $paginator])
 
 @endsection

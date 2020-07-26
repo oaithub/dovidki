@@ -1,5 +1,4 @@
 @if($paginator)
-    @include('layouts._pagination')
 
     <table class="table table-hover">
         <thead>
