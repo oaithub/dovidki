@@ -19,7 +19,7 @@ class OrderController extends Controller
         $this->orderRepository = app(OrderRepository::class);
     }
 
-    public function show($id)    //TODO: One user order
+    public function show($id)
     {
         $order = $this->orderRepository->getForShow($id);
         abort_if(empty($order), 404);
@@ -32,8 +32,13 @@ class OrderController extends Controller
     public function create()
     {
         $user = Auth::user();
-        $groups = $user->groups();
         $types = Order::typeList();
+
+        $requestStartTime = microtime(true);
+        $groups = $user->groups();
+        $requestEndTime = microtime(true);
+
+        \Debugbar::info('Time for user groups request - '.($requestEndTime-$requestStartTime).' seconds');
 
         return view('orders.create', compact('groups', 'user', 'types'));
     }

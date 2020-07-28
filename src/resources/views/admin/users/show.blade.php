@@ -11,12 +11,8 @@
         </div>
 
         <div class="card-body">
-            <div class="continer row mt-3">
-                <div class="col-md">
-                    <h3>Активні ролі:</h3>
-                    @include('admin.roles.includes._role-list', ['roles' => $roles])
-                </div>
-            </div>
+            <h3>Активні ролі:</h3>
+            @include('admin.roles.includes._role-list', ['roles' => $roles])
 
             <hr>
 

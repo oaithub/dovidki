@@ -32,7 +32,7 @@ class LoginController extends Controller
     /**
      * Log users out of application.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function logout()
     {
@@ -54,7 +54,7 @@ class LoginController extends Controller
     /**
      * Obtain the user information from Google.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function handleProviderCallback()
     {
@@ -62,7 +62,7 @@ class LoginController extends Controller
             $user = Socialite::driver('google')->user();
         } catch (\Exception $e) {
             return redirect()->route('login')
-                ->withErrors('Невідома помилка. Спробуйте ще раз.');    //TODO:Add error list, login page, change all redirects below
+                ->withErrors('Невідома помилка. Спробуйте ще раз.');
         }
         // only allow people with @oa.edu.ua to login
         if(explode("@", $user->email)[1] !== 'oa.edu.ua'){

@@ -15,7 +15,9 @@
         @foreach($paginator as $order)
             <tr>
                 <th scope="row">{{ $order->id }}</th>
-                <td><a href="{{ route('admin.user.show', $order->user->id ) }}">{{ $order->user->getNameInitials() }}</a></td>
+                @if(($showForStudent ?? false) == false)
+                    <td><a href="{{ route('admin.user.show', $order->user->id ) }}">{{ $order->user->getNameInitials() }}</a></td>
+                @endif
                 <td>{{ $order->group->specialty }}, {{ $order->group->year }} курс</td>
                 <td>{{ $order->type }}</td>
                 @if($showState ?? true)

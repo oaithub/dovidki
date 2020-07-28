@@ -19,7 +19,7 @@
                            placeholder="Назва ролі" value="{{ old('name', $role->name) }}">
                 </div>
 
-                <h2>Права</h2>
+                <h2>Дозволи</h2>
 
                 <table class="table table-hover">
                     <thead>

@@ -4,17 +4,23 @@
 
 @section('user-content')
 
-    <h1>{{ $user["name"] }}</h1>
-    <div>
-        @if($user->isManager())
-            <h4 class="text-warning">Права доступу менеджера</h4>
-        @endif
-        e-mail: {{ $user->email }}
-    </div>
+    <div class="card">
+        <div class="card-header">
+            <h2>{{ $user->name }}</h2>
+            <div class="form-text text-muted">{{ $user->email }}</div>
+        </div>
+        <div class="card-body">
+            <div>
+                @if($user->isManager())
+                    <h4 class="text-warning">Права доступу менеджера</h4>
+                @endif
+            </div>
 
-    <div class="mt-2 mb-2">
-        <a href="{{ route('order.create') }}"><button type="button" class="btn btn-primary btn-lg">Створити заявку</button></a>
+            <div class="mt-2 mb-2">
+                <a href="{{ route('order.create') }}"><button type="button" class="btn btn-primary btn-lg">Створити заявку</button></a>
+            </div>
+            @include('orders.includes._order-list', ['showForStudent' => true])
+        </div>
     </div>
-    @include('orders.includes._order-list', ['showForStudent' => true])
 
 @endsection
