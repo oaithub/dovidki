@@ -34,7 +34,6 @@
                         <tr>
                             <th scope="row">
                                 <div class="form-check">
-                                    <input type="hidden" name="permission[]" value="0">
                                     <input class="form-check-input" {{ $rolePermissions->contains($permission->id) ? 'checked' : '' }}
                                     name="permission[]" type="checkbox" value="{{ $permission->id }}">
                                 </div>

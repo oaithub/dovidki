@@ -4,7 +4,6 @@ namespace App\Http\Requests;
 
 use App\Models\Order;
 use Auth;
-use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -37,5 +36,15 @@ class OrderCreateRequest extends FormRequest
             'period_to' => $dateRules,
         ];
         //TODO: Create custom validation rules
+    }
+
+    public function attributes()
+    {
+        return [
+            'group' => 'Група',
+            'type' => 'Тип довідки',
+            'period_from' => 'Початок періоду',
+            'period_to' => 'Кінець періоду'
+        ];
     }
 }

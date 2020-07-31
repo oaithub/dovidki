@@ -32,4 +32,11 @@ class OrderUpdateRequest extends FormRequest
             'response_message' => 'required|string|max:700',
         ];
     }
+
+    public function attributes()
+    {
+        return [
+          'response_message' => 'Відповідь для користувача'
+        ];
+    }
 }

@@ -26,7 +26,17 @@ class RoleUpdateRequest extends FormRequest
     {
         return [
             'name' => 'sometimes|required|unique:roles,name,'.$this->role,
-            'permission' => 'required'
+            'permission' => 'array',
+            'permission.*' => 'exists:permissions,id'
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'name' => 'Назва ролі',
+            'permission' => 'Дозволи',
+            'permission.*' => 'Дозволи'
         ];
     }
 }
