@@ -23,7 +23,7 @@ class PermissionRepository extends CoreRepository
      */
     public function getAllWithPaginate($count = 10)
     {
-        $columns = ['id', 'name'];
+        $columns = ['id', 'name', 'description'];
 
         $result = $this->startConditions()
             ->select($columns)
@@ -41,7 +41,7 @@ class PermissionRepository extends CoreRepository
      */
     public function getAllForList()
     {
-        $columns = ['id', 'name'];
+        $columns = ['id', 'name', 'description'];
 
         $result = $this->startConditions()
             ->select($columns)

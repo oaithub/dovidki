@@ -68,6 +68,6 @@ class UserController extends Controller
 
         $user->syncRoles($request->input('role'));
 
-        return back();
+        return redirect()->route('admin.user.show', $user->id);
     }
 }

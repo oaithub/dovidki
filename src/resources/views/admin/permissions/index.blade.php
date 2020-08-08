@@ -24,7 +24,7 @@
                     <tr>
                         <th scope="row">{{ $permission->id }}</th>
                         <td>{{ $permission->name }}</td>
-                        <td>Можливо опис</td>
+                        <td>{{ $permission->description }}</td>
                         <td><a href="{{ route('admin.permission.show', $permission->id) }}" class="btn btn-info btn-sm active" role="button" aria-pressed="true">Переглянути</a></td>
                     </tr>
                 @endforeach

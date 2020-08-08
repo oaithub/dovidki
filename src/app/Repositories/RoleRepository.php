@@ -23,7 +23,7 @@ class RoleRepository extends CoreRepository
      */
     public function getAllWithPaginate($count = 25)    //TODO: add toBase() method to all repositories
     {
-        $columns = ['id', 'name',];
+        $columns = ['id', 'name', 'description'];
 
         $result = $this->startConditions()
             ->select($columns)
@@ -40,7 +40,7 @@ class RoleRepository extends CoreRepository
      */
     public function getAllForList()
     {
-        $columns = ['id', 'name'];
+        $columns = ['id', 'name', 'description'];
 
         $result = $this->startConditions()
             ->select($columns)

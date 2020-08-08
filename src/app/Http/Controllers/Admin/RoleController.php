@@ -101,6 +101,7 @@ class RoleController extends Controller
         abort_if(empty($role), 404);
 
         $role->name = $request->input('name');
+        $role->description = $request->input('description');
         $role->save();
 
         $role->syncPermissions($request->input('permission'));

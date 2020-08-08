@@ -26,6 +26,7 @@ class RoleUpdateRequest extends FormRequest
     {
         return [
             'name' => 'required|unique:roles,name,'.$this->role,
+            'description' => 'nullable|string|max:250',
             'permission' => 'array',
             'permission.*' => 'exists:permissions,id'
         ];

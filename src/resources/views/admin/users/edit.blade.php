@@ -37,7 +37,7 @@
                                 <a href="{{ route('admin.role.show', $role->id) }}">{{ $role->name }}</a>
                             </td>
                             <td>
-                                Можливо опис
+                                {{ $role->description }}
                             </td>
                         </tr>
                     @endforeach

@@ -18,6 +18,11 @@
                     <input type="text" name="name" class="form-control"
                            placeholder="Назва ролі" value="{{ old('name', $role->name) }}">
                 </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Опис ролі:</label>
+                    <textarea name="description" rows="4"
+                              class="form-control">{{ old('description', $role->description) }}</textarea>
+                </div>
 
                 <h2>Дозволи</h2>
 
@@ -39,10 +44,10 @@
                                 </div>
                             </th>
                             <td>
-                                <a href="{{ route('admin.permission.show', $role->id) }}">{{ $permission->name }}</a>
+                                <a href="{{ route('admin.permission.show', $permission->id) }}">{{ $permission->name }}</a>
                             </td>
                             <td>
-                                Можливо опис
+                                {{ $permission->description }}
                             </td>
                         </tr>
                     @endforeach

@@ -11,7 +11,7 @@
 
         <div class="card-body">
             <div>
-                Опис цього дозволу і все. Можливо ще якийсь текст.
+                {{ $permission->description }}
             </div>
             <div class="mt-4">
                 <h2>
@@ -32,7 +32,7 @@
                         <tr>
                             <th scope="row">{{ $role->id }}</th>
                             <td>{{ $role->name }}</td>
-                            <td>Можливо опис</td>
+                            <td>{{ $role->desciption }}</td>
                             <td><a href="{{ route('admin.role.show', $role->id) }}" class="btn btn-info btn-sm active" role="button" aria-pressed="true">Переглянути</a></td>
                         </tr>
                     @endforeach

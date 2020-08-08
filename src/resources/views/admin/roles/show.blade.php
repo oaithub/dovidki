@@ -11,7 +11,7 @@
 
         <div class="card-body">
             <div>
-                Опис цієї ролі і все. Можливо ще якийсь текст.
+                {{ $role->description }}
             </div>
             <div class="mt-4">
                 <h2>
@@ -31,7 +31,7 @@
                         <tr>
                             <th scope="row">{{ $permission->id }}</th>
                             <td>{{ $permission->name }}</td>
-                            <td>Можливо опис</td>
+                            <td>{{ $permission->description }}</td>
                         </tr>
                     @endforeach
                     </tbody>
