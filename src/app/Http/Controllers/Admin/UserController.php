@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserUpdateRequest;
 use App\Repositories\OrderRepository;
+use App\Repositories\RoleRepository;
 use App\Repositories\UserRepository;
-use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -14,6 +15,12 @@ class UserController extends Controller
      * @var OrderRepository
      */
     private $orderRepository;
+
+    /**
+     * @var RoleRepository
+     */
+    private $roleRepository;
+
     /**
      * @var UserRepository
      */
@@ -22,6 +29,7 @@ class UserController extends Controller
     public function __construct()
     {
         $this->orderRepository = app(OrderRepository::class);
+        $this->roleRepository = app(RoleRepository::class);
         $this->userRepository = app(UserRepository::class);
     }
 
@@ -35,9 +43,31 @@ class UserController extends Controller
     {
         $user = $this->userRepository->getForShow($id);
         abort_if(empty($user), 404);
+
         $paginator = $this->orderRepository->getAllByUserIdWithPaginate($id);
         $roles = $user->roles;
 
         return view('admin.users.show', compact('user', 'paginator', 'roles'));
+    }
+
+    public function edit($userId)
+    {
+        $user = $this->userRepository->getForEdit($userId);
+        abort_if(empty($user), 404);
+
+        $allRoles = $this->roleRepository->getAllForList();
+        $userRoles = $user->roles->pluck('id', 'id');    //Return array of roles id that belongs to user
+
+        return view('admin.users.edit', compact('user', 'allRoles', 'userRoles'));
+    }
+
+    public function update(UserUpdateRequest $request, $id)
+    {
+        $user = $this->userRepository->getForEdit($id);
+        abort_if(empty($user), 404);
+
+        $user->syncRoles($request->input('role'));
+
+        return back();
     }
 }

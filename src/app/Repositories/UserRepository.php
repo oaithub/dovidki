@@ -43,4 +43,21 @@ class UserRepository extends CoreRepository
     public function getForShow($id) {
         return $this->startConditions()->find($id);
     }
+
+    /**
+     * @param int $id Target user id
+     * @return Model
+     */
+    public function getForEdit($id)
+    {
+        $columns = ['id', 'name', 'email',];
+
+        $result = $this->startConditions()
+            ->select($columns)
+            ->where('id', $id)
+            ->with('roles:id,name')
+            ->first();
+
+        return $result;
+    }
 }

@@ -30,6 +30,8 @@
                 @endforeach
                 </tbody>
             </table>
+
+            @include('layouts._pagination')
         </div>
     </div>
 

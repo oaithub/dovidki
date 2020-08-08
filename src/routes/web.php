@@ -24,10 +24,10 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/profile', 'UserController@current')->name('user.profile');    //User profile view
 
-    Route::group(['middleware' => 'manager', 'prefix' => 'manager'], function () {
+    Route::group(['middleware' => 'manager', 'prefix' => 'manager'], function () {    //TODO: route namespace
 
         Route::resource('users', 'Admin\UserController')
-            ->only(['index', 'show'])
+            ->only(['index', 'show', 'edit', 'update'])
             ->names('admin.user');
 
         Route::get('/orders/in-queue', 'Admin\OrderController@inQueue')->name('admin.order.inQueue');

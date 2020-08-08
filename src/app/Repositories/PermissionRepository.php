@@ -37,7 +37,7 @@ class PermissionRepository extends CoreRepository
     /**
      * Return collection of all permissions
      *
-     * @return mixed
+     * @return Collection
      */
     public function getAllForList()
     {

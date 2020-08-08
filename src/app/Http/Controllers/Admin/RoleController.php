@@ -46,7 +46,7 @@ class RoleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param RoleCreateRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(RoleCreateRequest $request)    //TODO: Add error and success notifications
@@ -91,9 +91,9 @@ class RoleController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param RoleUpdateRequest $request
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(RoleUpdateRequest $request, $id)
     {
@@ -112,10 +112,12 @@ class RoleController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)    //TODO
     {
         dd(__method__);
+
+        return redirect()->route('admin.role.index');
     }
 }

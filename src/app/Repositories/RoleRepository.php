@@ -34,6 +34,23 @@ class RoleRepository extends CoreRepository
     }
 
     /**
+     * Return collection of all roles
+     *
+     * @return Collection
+     */
+    public function getAllForList()
+    {
+        $columns = ['id', 'name'];
+
+        $result = $this->startConditions()
+            ->select($columns)
+            ->toBase()
+            ->get();
+
+        return $result;
+    }
+
+    /**
      * Return one role for edit
      *
      *  @param int $id Target role id

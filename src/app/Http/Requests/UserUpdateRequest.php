@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
-class RoleUpdateRequest extends FormRequest
+class UserUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,18 +25,16 @@ class RoleUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:roles,name,'.$this->role,
-            'permission' => 'array',
-            'permission.*' => 'exists:permissions,id'
+            'role' => 'array',
+            'role.*' => 'exists:roles,id'
         ];
     }
 
     public function attributes()
     {
         return [
-            'name' => 'Назва ролі',
-            'permission' => 'Дозволи',
-            'permission.*' => 'Дозволи'
+            'role' => 'Ролі',
+            'role.*' => 'Ролі'
         ];
     }
 }

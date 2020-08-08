@@ -22,6 +22,8 @@
                 </div>
             </form>
             @include('admin.roles.includes._role-list', ['roles' => $paginator])
+
+            @include('layouts._pagination')
         </div>
     </div>
 

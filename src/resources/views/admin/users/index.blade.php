@@ -20,7 +20,7 @@
                         <th scope="col">Ім'я студента</th>
                         <th scope="col">E-Mail</th>
                         <th scope="col">Кількість замовлень</th>
-                        <th scope="col">Профіль</th>
+                        <th scope="col"></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -30,7 +30,10 @@
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->orders_count }}</td>
-                            <td><a href="{{ route('admin.user.show', $user->id) }}" class="btn btn-info btn-sm active" role="button" aria-pressed="true">Перегляд</a></td>
+                            <td>
+                                <a href="{{ route('admin.user.show', $user->id) }}" class="btn btn-info btn-sm" role="button" aria-pressed="true">Перегляд</a>
+                                <a href="{{ route('admin.user.edit', $user->id) }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true">Редагувати</a>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>
