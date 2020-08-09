@@ -22,7 +22,7 @@
                 <td>{{ $order->type }}</td>
                 @if($showState ?? true)
                 <td>
-                    @include('orders.includes._orderState', ['stateCode' => $order->state])
+                    @include('orders.includes._order-state', ['stateCode' => $order->state])
                 </td>
                 @endif
 

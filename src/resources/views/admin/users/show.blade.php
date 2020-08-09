@@ -11,8 +11,10 @@
         </div>
 
         <div class="card-body">
-            <h3>Активні ролі:</h3>
-            @include('admin.roles.includes._role-list', ['roles' => $roles])
+            <div class="mb-3">
+                <h3>Активні ролі:</h3>
+                @include('admin.roles.includes._role-list', ['roles' => $roles, 'userIdForEdit' => $user->id])
+            </div>
 
             <hr>
 

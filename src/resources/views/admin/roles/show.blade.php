@@ -18,24 +18,7 @@
                     Активні дозволи
                 </h2>
 
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th scope="col">#id</th>
-                        <th scope="col">Назва ролі</th>
-                        <th scope="col">Опис</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($role->permissions as $permission)
-                        <tr>
-                            <th scope="row">{{ $permission->id }}</th>
-                            <td>{{ $permission->name }}</td>
-                            <td>{{ $permission->description }}</td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
+                @include('admin.permissions.includes._permission-list', ['permissions' => $role->permissions])
             </div>
         </div>
     </div>

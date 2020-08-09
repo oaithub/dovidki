@@ -35,7 +35,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($allPermissions as $permission)
+                    @forelse($allPermissions as $permission)
                         <tr>
                             <th scope="row">
                                 <div class="form-check">
@@ -50,7 +50,11 @@
                                 {{ $permission->description }}
                             </td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="3" class="text-center">Дозволи відсутні</td>
+                        </tr>
+                    @endforelse
                     </tbody>
                 </table>
                 <button type="submit" class="btn btn-primary">Зберегти</button>

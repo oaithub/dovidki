@@ -17,27 +17,7 @@
                 <h2>
                     Ролі з доступом
                 </h2>
-
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th scope="col">#id</th>
-                        <th scope="col">Назва ролі</th>
-                        <th scope="col">Опис</th>
-                        <th scope="col">Перегляд</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($permission->roles as $role)
-                        <tr>
-                            <th scope="row">{{ $role->id }}</th>
-                            <td>{{ $role->name }}</td>
-                            <td>{{ $role->desciption }}</td>
-                            <td><a href="{{ route('admin.role.show', $role->id) }}" class="btn btn-info btn-sm active" role="button" aria-pressed="true">Переглянути</a></td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
+                @include('admin.roles.includes._role-list', ['roles' => $permission->roles])
             </div>
         </div>
     </div>
