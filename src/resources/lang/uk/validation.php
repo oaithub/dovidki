@@ -129,9 +129,8 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
-        ],
+        'correct-group' => 'Поле :attribute не коректне.',
+        'correct-type' => 'Поле :attribute не коректне.',
     ],
 
     /*

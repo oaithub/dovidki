@@ -44,7 +44,7 @@ class UserController extends Controller
         $user = $this->userRepository->getForShow($id);
         abort_if(empty($user), 404);
 
-        $paginator = $this->orderRepository->getAllByUserIdWithPaginate($id);
+        $paginator = $this->orderRepository->getAllByUserIdWithPaginate($id);    //TODO: Change var name
         $roles = $user->roles;
 
         return view('admin.users.show', compact('user', 'paginator', 'roles'));
@@ -56,7 +56,7 @@ class UserController extends Controller
         abort_if(empty($user), 404);
 
         $allRoles = $this->roleRepository->getAllForList();
-        $userRoles = $user->roles->pluck('id', 'id');    //Return array of roles id that belongs to user
+        $userRoles = $user->roles->pluck('id');    //Return array of roles id that belongs to user
 
         return view('admin.users.edit', compact('user', 'allRoles', 'userRoles'));
     }

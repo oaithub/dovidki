@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\PermissionRepository;
-use Illuminate\Http\Request;
 
 class PermissionController extends Controller
 {
@@ -43,6 +42,7 @@ class PermissionController extends Controller
     public function show($id)
     {
         $permission = $this->permissionRepository->getForShow($id);
+        abort_if(empty($permission), 404);
 
         return view('admin.permissions.show', compact('permission'));
     }

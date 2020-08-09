@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Order;
+use App\Rules\CorrectGroup;
+use App\Rules\CorrectType;
 use Auth;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class OrderCreateRequest extends FormRequest
 {
@@ -26,16 +26,13 @@ class OrderCreateRequest extends FormRequest
      */
     public function rules()
     {
-        $correctGroups = Auth::user()->groups()->keys();
-        $correctTypes = Order::typeList()->keys();
         $dateRules = 'required|date|after:'.now()->subYears(6)->format('M Y');
         return [
-            'group' => ['required', Rule::in($correctGroups)],
-            'type' => ['required', Rule::in($correctTypes)],
+            'group' => ['required', new CorrectGroup],
+            'type' => ['required', new CorrectType],
             'period_from' => $dateRules,
             'period_to' => $dateRules,
         ];
-        //TODO: Create custom validation rules
     }
 
     public function attributes()

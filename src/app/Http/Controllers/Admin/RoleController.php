@@ -83,7 +83,7 @@ class RoleController extends Controller
         abort_if(empty($role), 404);
 
         $allPermissions = $this->permissionRepository->getAllForList();
-        $rolePermissions = $role->permissions->pluck('id', 'id');
+        $rolePermissions = $role->permissions->pluck('id');
 
         return view('admin.roles.edit', compact('role', 'allPermissions', 'rolePermissions'));
     }

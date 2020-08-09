@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Http;
@@ -45,9 +44,9 @@ class User extends Authenticatable
      * Serhii Petrovych Kovalchuk
      * Kovalchuk S.P.
      *
-     * @return array
+     * @return string
      */
-    public function getNameInitials()    //TODO: Refactor(?)
+    public function getNameInitials()
     {
         $pieces = mb_split(' ', $this->name);
         $initials = $pieces[2].' '.mb_substr($pieces[0], 0, 1).'. '.mb_substr($pieces[1], 0, 1).'.';
@@ -65,14 +64,19 @@ class User extends Authenticatable
         return $this->manager;
     }
 
-    public function groups()
+    /**
+     * Returns collection of student groups
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function groups()    //TODO: Create class for api requests
     {
         /*
         $response = '[{"speciality":"Облік і оподаткування","year":1},{"speciality":"Національна безпека","year":3}]';
 
         */
 
-        //$token = 'skajnflnln';    //TODO: Add request for getting token, diff of ->body and ->json
+        //$token = '__token__';    //TODO: Add request for getting token
         $url = 'https://dekanat.oa.edu.ua/api/v1/student/spacialties';
         $response = Http::get($url, [
             'email' => $this->email

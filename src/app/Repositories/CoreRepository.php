@@ -18,12 +18,12 @@ abstract class CoreRepository
     }
 
     /**
-     *  @return mixed
+     *  @return Model
      */
     abstract protected function getModelClass();
 
     /**
-     *  @return Model|\Illuminate\Foundation\Application|mixed
+     *  @return Model
      */
     protected function startConditions()
     {

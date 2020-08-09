@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Auth;
 
 class HomeController extends Controller
@@ -10,7 +9,7 @@ class HomeController extends Controller
     /**
      * Redirect user to his profile and manager to the control panel
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function index()
     {

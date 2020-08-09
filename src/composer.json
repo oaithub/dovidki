@@ -19,7 +19,8 @@
         "laravel/socialite": "^4.3",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
-        "spatie/laravel-permission": "^3.13"
+        "spatie/laravel-permission": "^3.13",
+      "ext-mbstring": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.3",
