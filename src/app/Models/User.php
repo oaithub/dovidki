@@ -4,8 +4,8 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Http;
 use Spatie\Permission\Traits\HasRoles;
+use App\Services\Api\Student as StudentApi;
 
 class User extends Authenticatable
 {
@@ -69,20 +69,10 @@ class User extends Authenticatable
      *
      * @return \Illuminate\Support\Collection
      */
-    public function groups()    //TODO: Create class for api requests
+    public function groups()
     {
-        /*
-        $response = '[{"speciality":"Облік і оподаткування","year":1},{"speciality":"Національна безпека","year":3}]';
-
-        */
-
-        //$token = '__token__';    //TODO: Add request for getting token
-        $url = 'https://dekanat.oa.edu.ua/api/v1/student/spacialties';
-        $response = Http::get($url, [
-            'email' => $this->email
-        ])->body();
-
-        return collect(json_decode($response));
+        $groups = (new StudentApi)->getGroupsByEmail($this->email);
+        return $groups;
     }
 
 
