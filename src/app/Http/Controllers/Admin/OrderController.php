@@ -26,9 +26,9 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $paginator = $this->orderRepository->getAllWithPaginate(15);
+        $orders = $this->orderRepository->getAllWithPaginate(15);
 
-        return view('admin.orders.index', compact('paginator'));
+        return view('admin.orders.index', compact('orders'));
     }
 
     /**
@@ -38,9 +38,9 @@ class OrderController extends Controller
      */
     public function inQueue()
     {
-        $paginator = $this->orderRepository->getInQueuedWithPaginate(15);
+        $orders = $this->orderRepository->getInQueuedWithPaginate(15);
 
-        return view('admin.orders.in-queue', compact('paginator'));
+        return view('admin.orders.in-queue', compact('orders'));
     }
 
     /**
@@ -50,9 +50,9 @@ class OrderController extends Controller
      */
     public function issued()
     {
-        $paginator = $this->orderRepository->getIssuedWithPaginate(15);
+        $orders = $this->orderRepository->getIssuedWithPaginate(15);
 
-        return view('admin.orders.issued', compact('paginator'));
+        return view('admin.orders.issued', compact('orders'));
     }
 
     /**
@@ -62,9 +62,9 @@ class OrderController extends Controller
      */
     public function ready()
     {
-        $paginator = $this->orderRepository->getReadyWithPaginate(15);
+        $orders = $this->orderRepository->getReadyWithPaginate(15);
 
-        return view('admin.orders.ready', compact('paginator'));
+        return view('admin.orders.ready', compact('orders'));
     }
 
     /**

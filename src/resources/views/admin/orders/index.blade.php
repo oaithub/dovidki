@@ -10,7 +10,8 @@
         </div>
 
         <div class="card-body">
-            @include('orders.includes._order-list')
+            @include('admin.orders.includes._order-list')
+            @include('layouts._pagination', ['paginator' => $orders])
         </div>
     </div>
 

@@ -30,8 +30,8 @@ class UserController extends Controller
         $id = Auth::id();
         $user = $this->userRepository->getForShow($id);
         abort_if(empty($user), 404);
-        $paginator = $this->orderRepository->getAllByUserIdWithPaginate($id);
+        $orders = $this->orderRepository->getAllByUserIdWithPaginate($id);
 
-        return view('users.profile', compact('user', 'paginator'));
+        return view('users.profile', compact('user', 'orders'));
     }
 }

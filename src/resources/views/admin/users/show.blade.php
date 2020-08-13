@@ -23,7 +23,8 @@
                     Усі заяви студента
                 </h2>
 
-                @include('orders.includes._order-list')
+                @include('admin.orders.includes._order-list')
+                @include('layouts._pagination', ['paginator' => $orders])
             </div>
         </div>
     </div>

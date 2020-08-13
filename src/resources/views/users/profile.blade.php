@@ -19,7 +19,8 @@
             <div class="mt-2 mb-2">
                 <a href="{{ route('order.create') }}"><button type="button" class="btn btn-primary btn-lg">Створити заявку</button></a>
             </div>
-            @include('orders.includes._order-list', ['showForStudent' => true])
+            @include('orders.includes._order-list')
+            @include('layouts._pagination', ['paginator' => $orders])
         </div>
     </div>
 

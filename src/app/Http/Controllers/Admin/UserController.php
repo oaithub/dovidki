@@ -44,10 +44,10 @@ class UserController extends Controller
         $user = $this->userRepository->getForShow($id);
         abort_if(empty($user), 404);
 
-        $paginator = $this->orderRepository->getAllByUserIdWithPaginate($id);    //TODO: Change var name
+        $orders = $this->orderRepository->getAllByUserIdWithPaginate($id);
         $roles = $user->roles;
 
-        return view('admin.users.show', compact('user', 'paginator', 'roles'));
+        return view('admin.users.show', compact('user', 'orders', 'roles'));
     }
 
     public function edit($userId)
