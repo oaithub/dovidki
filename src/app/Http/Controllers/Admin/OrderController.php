@@ -84,11 +84,7 @@ class OrderController extends Controller
     public function update(OrderUpdateRequest $request, $id)
     {
         $item = $this->orderRepository->getForEdit($id);
-        if (empty($item)) {
-            return back()
-                ->withErrors(['msg' => "Замовлення #{$id} не знайдено"])
-                ->withInput();
-        }
+        abort_if(empty($item), 404);
 
         $data = $request->input();
 
@@ -97,10 +93,10 @@ class OrderController extends Controller
         if ($item) {
             return redirect()
                 ->route('admin.order.show', $item->id)
-                ->with(['success' => 'Успішно збережено']);
+                ->with('success', __('message.order.updated'));
         } else {
             return back()
-                ->withErrors(['msg' => 'Сталася помилка. Повторіть будь ласка ще раз.'])
+                ->withErrors(__('message.unknown_error'))
                 ->withInput();
         }
     }

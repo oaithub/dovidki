@@ -68,6 +68,8 @@ class UserController extends Controller
 
         $user->syncRoles($request->input('role'));
 
-        return redirect()->route('admin.user.show', $user->id);
+        return redirect()
+            ->route('admin.user.show', $user->id)
+            ->with('success', __('message.user.updated'));
     }
 }

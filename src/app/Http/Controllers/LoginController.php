@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 Use App\Models\User;
@@ -44,7 +43,7 @@ class LoginController extends Controller
     /**
      * Redirect the user to the Google authentication page.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function redirectToProvider()
     {
@@ -62,12 +61,12 @@ class LoginController extends Controller
             $user = Socialite::driver('google')->user();
         } catch (\Exception $e) {
             return redirect()->route('login')
-                ->withErrors('Невідома помилка. Спробуйте ще раз.');
+                ->withErrors(__('auth.unknown_error'));
         }
         // only allow people with @oa.edu.ua to login
         if(explode("@", $user->email)[1] !== 'oa.edu.ua'){
             return redirect()->route('login')
-                ->withErrors('Вхід в систему дозволений лише з поштою @oa.edu.ua');
+                ->withErrors(__('auth.wrong_email_domain'));
 
         }
         // check if they're an existing user

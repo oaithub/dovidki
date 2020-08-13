@@ -49,12 +49,14 @@ class RoleController extends Controller
      * @param RoleCreateRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(RoleCreateRequest $request)    //TODO: Add error and success notifications
+    public function store(RoleCreateRequest $request)
     {
         $name = $request->name;
         $role = Role::create(['name' => $name]);
 
-        return redirect()->route('admin.role.show', $role->id);
+        return redirect()
+            ->route('admin.role.show', $role->id)
+            ->with('success', __('message.role.created', ['name' => $name]));
     }
 
     /**
@@ -106,7 +108,8 @@ class RoleController extends Controller
 
         $role->syncPermissions($request->input('permission'));
 
-        return back();
+        return back()
+            ->with('success', __('message.role.updated'));
     }
 
     /**

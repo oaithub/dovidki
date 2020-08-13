@@ -56,10 +56,10 @@ class OrderController extends Controller
         if ($item) {
             return redirect()
                 ->route('user.profile')
-                ->with(['success' => 'Успішно збережено']);
+                ->with('success', __('message.order.created', ['id' => $item->id]));
         } else {
             return back()
-                ->withErrors(['msg' => 'Помилка при створенні нової заяви. Повторіть будь ласка ще раз.'])
+                ->withErrors(__('message.order.creation_error'))
                 ->withInput();
         }
     }
