@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Order;
+use App\Rules\CorrectState;
 use Illuminate\Foundation\Http\FormRequest;
 use Auth;
-use Illuminate\Validation\Rule;
 
 class OrderUpdateRequest extends FormRequest
 {
@@ -26,9 +25,8 @@ class OrderUpdateRequest extends FormRequest
      */
     public function rules()
     {
-        $correctStates = Order::stateList()->keys();
         return [
-            'state' => ['required', Rule::in($correctStates)],
+            'state_id' => ['required', new CorrectState],
             'response_message' => 'required|string|max:700',
         ];
     }
@@ -36,7 +34,8 @@ class OrderUpdateRequest extends FormRequest
     public function attributes()
     {
         return [
-          'response_message' => 'Відповідь для користувача'
+            'state_id' => 'Стан замовлення',
+            'response_message' => 'Відповідь для користувача',
         ];
     }
 }

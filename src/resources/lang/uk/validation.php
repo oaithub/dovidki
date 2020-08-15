@@ -130,6 +130,7 @@ return [
 
     'custom' => [
         'correct-group' => 'Поле :attribute не коректне.',
+        'correct-state' => 'Неправильний код стану.',
         'correct-type' => 'Поле :attribute не коректне.',
     ],
 

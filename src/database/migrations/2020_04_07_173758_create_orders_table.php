@@ -18,12 +18,13 @@ class CreateOrdersTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->json('group');
             $table->string('type');
-            $table->string('state')->default('in-queue');
+            $table->integer('state_id')->unsigned();
             $table->text('response_message')->nullable();
             $table->timestamp('period_from')->nullable();
             $table->timestamp('period_to')->nullable();
             $table->timestamps();
 
+            $table->foreign('state_id')->references('id')->on('order_states');
             $table->foreign('user_id')->references('id')->on('users');
         });
     }

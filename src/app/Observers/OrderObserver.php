@@ -5,6 +5,7 @@ namespace App\Observers;
 use App\Mail\OrderCreated;
 use App\Mail\OrderStateUpdated;
 use App\Models\Order;
+use App\Models\OrderState;
 use Auth;
 use Illuminate\Support\Facades\Mail;
 
@@ -49,7 +50,7 @@ class OrderObserver
 
     protected function setDefaultState(Order $order)
     {
-        $order->state = Order::getDefaultState();
+        $order->state_id = OrderState::DEFAULT;
     }
 
     /**

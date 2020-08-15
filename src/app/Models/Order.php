@@ -27,7 +27,7 @@ class Order extends Model
         'user_id',
         'group',
         'type',
-        'state',
+        'state_id',
         'response_message',
         'period_from',
         'period_to',
@@ -45,37 +45,6 @@ class Order extends Model
     ];
 
     /**
-     * All order states
-     *
-     * @var array
-     */
-    private static $states = [
-        'in-queue' => 'В черзі',
-        'wait-for-issue' => 'Очікує отримання',
-        'issued' => 'Видана',
-        'canceled-by-manager' => 'Відмінена бухгалтером'
-    ];
-
-    /**
-     * Return collection of all order states
-     *
-     * @return Collection
-     */
-    public static function stateList()
-    {
-        return collect(self::$states);
-    }
-
-    public function stateNameOrError()
-    {
-        if(array_key_exists($this->state, self::$states)) {
-            return self::$states[$this->state];
-        }
-
-        return 'Неправильний ключ стану';
-    }
-
-    /**
      * Return collection of all order types
      *
      * @return Collection
@@ -83,16 +52,6 @@ class Order extends Model
     public static function typeList()
     {
         return collect(self::$types);
-    }
-
-    /**
-     * Return default order state after creating.
-     *
-     * @return string
-     */
-    public static function getDefaultState()
-    {
-        return 'in-queue';
     }
 
     /**
@@ -119,6 +78,16 @@ class Order extends Model
         }
 
         return 'Неправильний ключ типу';
+    }
+
+    /**
+     * Return state of order
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function state()
+    {
+        return $this->belongsTo(OrderState::class);
     }
 
     /**

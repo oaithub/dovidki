@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Order as Model;
-use Illuminate\Database\Eloquent\Collection;
+use App\Models\OrderState;
 
 /**
  * Class OrderRepository.
@@ -21,14 +21,14 @@ class OrderRepository extends CoreRepository
      * @param int $count Orders per page
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getAllWithPaginate($count = 25)
+    public function getAllWithPaginate($count = 25)    //TODO: with('state:code,name')
     {
-        $columns = ['id', 'user_id', 'group', 'type', 'state', 'response_message', 'user_id',];
+        $columns = ['id', 'user_id', 'group', 'type', 'state_id', 'response_message', 'user_id',];
 
         $result = $this->startConditions()
             ->select($columns)
             ->oldest('id')
-            ->with(['user:id,name'])
+            ->with(['user:id,name', 'state'])
             ->paginate($count);
 
         return $result;
@@ -43,11 +43,11 @@ class OrderRepository extends CoreRepository
      */
     public function getAllByUserIdWithPaginate($userId, $count = 25)
     {
-        $columns = ['id', 'user_id', 'group', 'type', 'state', 'response_message', 'user_id',];
+        $columns = ['id', 'user_id', 'group', 'type', 'state_id', 'response_message', 'user_id',];
 
         $result = $this->startConditions()
             ->select($columns)
-            ->with('user')
+            ->with('user', 'state')
             ->where('user_id', $userId)
             ->oldest('id')
             ->paginate($count);
@@ -63,13 +63,13 @@ class OrderRepository extends CoreRepository
      */
     public function getReadyWithPaginate($count = 25)
     {
-        $columns = ['id', 'user_id', 'group', 'type', 'state', 'response_message', 'user_id',];
+        $columns = ['id', 'user_id', 'group', 'type', 'state_id', 'response_message', 'user_id',];
 
         $result = $this->startConditions()
             ->select($columns)
             ->oldest('id')
-            ->where('state', 'wait-for-issue')
-            ->with(['user:id,name'])
+            ->where('state_id', OrderState::STATE_WAIT_FOR_ISSUE)
+            ->with('user:id,name', 'state')
             ->paginate($count);
 
         return $result;
@@ -83,14 +83,14 @@ class OrderRepository extends CoreRepository
      */
     public function getInQueuedWithPaginate($count = 25)
     {
-        $columns = ['id', 'user_id', 'group', 'type', 'state', 'response_message', 'user_id',];
+        $columns = ['id', 'user_id', 'group', 'type', 'state_id', 'response_message', 'user_id',];
 
         $result = $this->startConditions()
             ->select($columns)
             ->oldest('id')
-            ->where('state', 'in-queue')
+            ->where('state_id', OrderState::STATE_IN_QUEUE)
             ->oldest('id')
-            ->with(['user:id,name'])
+            ->with('user:id,name', 'state')
             ->paginate($count);
 
         return $result;
@@ -104,13 +104,13 @@ class OrderRepository extends CoreRepository
      */
     public function getIssuedWithPaginate($count = 25)
     {
-        $columns = ['id', 'user_id', 'group', 'type', 'state', 'response_message', 'user_id',];
+        $columns = ['id', 'user_id', 'group', 'type', 'state_id', 'response_message', 'user_id',];
 
         $result = $this->startConditions()
             ->select($columns)
             ->oldest('id')
-            ->where('state', 'issued')
-            ->with(['user:id,name'])
+            ->where('state_id', OrderState::STATE_ISSUED)
+            ->with('user:id,name', 'state')
             ->paginate($count);
 
         return $result;

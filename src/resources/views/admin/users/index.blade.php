@@ -1,6 +1,6 @@
 @extends('admin.layouts.admin-core')
 
-@section('title', 'Усі заяви')
+@section('title', 'Усі користувачі')
 
 @section('admin-content')
 

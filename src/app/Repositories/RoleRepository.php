@@ -21,7 +21,7 @@ class RoleRepository extends CoreRepository
      * @param int $count Roles per page
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getAllWithPaginate($count = 25)    //TODO: add toBase() method to all repositories
+    public function getAllWithPaginate($count = 25)
     {
         $columns = ['id', 'name', 'description'];
 

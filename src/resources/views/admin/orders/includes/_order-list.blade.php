@@ -17,7 +17,7 @@
             <td>{{ $order->group->specialty }}, {{ $order->group->year }} курс</td>
             <td>{{ $order->type }}</td>
             <td>
-                @include('orders.includes._order-state', ['stateCode' => $order->state])
+                @include('orders.includes._order-state', ['stateCode' => $order->state->code])
             </td>
             <td><a href="{{ route('admin.order.show', $order->id) }}" class="btn btn-info btn-sm active" role="button" aria-pressed="true">Перегляд</a></td>
         </tr>

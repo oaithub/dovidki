@@ -9,7 +9,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h2>Замовлення #{{ $order->id }} - @include('orders.includes._order-state', ['stateCode' => $order->state])</h2>
+                    <h2>Замовлення #{{ $order->id }} - @include('orders.includes._order-state', ['stateCode' => $order->state->code])</h2>
                 </div>
                 <!-- CARDBODY START -->
                 <div class="card-body">
@@ -18,9 +18,9 @@
 
                     <hr>
 
-                    @if($order->state == 'in-queue' or $order->state == 'wait-for-issue')
+                    @if($order->state->code == 'in-queue' or $order->state->code == 'wait-for-issue')
                         <ul class="nav nav-tabs" role="tablist">
-                            @if($order->state == 'in-queue')
+                            @if($order->state->code == 'in-queue')
                                 <li class="nav-item">
                                     <a class="nav-link" data-toggle="tab" href="#order-ready" role="tab">Замовлення готове</a>
                                 </li>
@@ -35,13 +35,13 @@
                         <br>
                         <div class="tab-content">
 
-                            @if($order->state == 'in-queue')
+                            @if($order->state->code == 'in-queue')
                                 <!-- ORDER-READY TOGGLE START -->
                                 <div class="tab-pane" id="order-ready" role="tabpanel">
                                     <form action="{{ route('admin.order.update', $order->id) }}" method="POST">
                                         @csrf
                                         @method('PATCH')
-                                        <input type="hidden" name="state" value="wait-for-issue">
+                                        <input type="hidden" name="state_id" value="{{ \App\Models\OrderState::STATE_WAIT_FOR_ISSUE }}">
                                         <div class="form-group">
                                             <label for="response_message">Інформація для користувача</label>
                                             <textarea name="response_message" id="response_message" rows="8" class="form-control">{{ old('response_message', $order->response_message) }}</textarea>
@@ -57,7 +57,7 @@
                                 <form action="{{ route('admin.order.update', $order->id) }}" method="POST">
                                     @csrf
                                     @method('PATCH')
-                                    <input type="hidden" name="state" value="issued">
+                                    <input type="hidden" name="state_id" value="{{ \App\Models\OrderState::STATE_ISSUED }}">
                                     <div class="form-group">
                                         <label for="response_message">Інформація для користувача</label>
                                         <textarea name="response_message" id="response_message" rows="8" class="form-control">{{ old('response_message', $order->response_message) }}</textarea>
@@ -72,7 +72,7 @@
                                 <form action="{{ route('admin.order.update', $order->id) }}" method="POST">
                                     @csrf
                                     @method('PATCH')
-                                    <input type="hidden" name="state" value="canceled-by-manager">
+                                    <input type="hidden" name="state_id" value="{{ \App\Models\OrderState::STATE_CANCELED_BY_MANAGER }}">
                                     <div class="form-group">
                                         <label for="response_message">Причина відміни</label>
                                         <textarea name="response_message" id="response_message" rows="8" class="form-control">{{ old('response_message', $order->response_message) }}</textarea>

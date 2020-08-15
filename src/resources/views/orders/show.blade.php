@@ -12,7 +12,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h2>Замовлення #{{ $order->id }} - @include('orders.includes._order-state', ['stateCode' => $order->state])</h2>
+                    <h2>Замовлення #{{ $order->id }} - @include('orders.includes._order-state', ['stateCode' => $order->state->code])</h2>
                 </div>
                 <!-- CARDBODY START -->
                 <div class="card-body">
