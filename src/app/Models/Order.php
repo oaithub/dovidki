@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Collection;
 
 class Order extends Model
 {
@@ -26,33 +25,12 @@ class Order extends Model
     protected $fillable = [
         'user_id',
         'group',
-        'type',
+        'type_id',
         'state_id',
         'response_message',
         'period_from',
         'period_to',
     ];
-
-    /**
-     * All order types
-     *
-     * @var array
-     */
-    private static $types = [
-        'income' => 'Доходи',
-        'study' => 'Навчання',
-        'debt' => 'Заборгованість',
-    ];
-
-    /**
-     * Return collection of all order types
-     *
-     * @return Collection
-     */
-    public static function typeList()
-    {
-        return collect(self::$types);
-    }
 
     /**
      * Get the user's speciality.
@@ -66,21 +44,6 @@ class Order extends Model
     }
 
     /**
-     * Get the order type.
-     *
-     * @param  string  $value
-     * @return string
-     */
-    public function getTypeAttribute($value)
-    {
-        if(array_key_exists($value, self::$types)) {
-            return self::$types[$value];
-        }
-
-        return 'Неправильний ключ типу';
-    }
-
-    /**
      * Return state of order
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -88,6 +51,16 @@ class Order extends Model
     public function state()
     {
         return $this->belongsTo(OrderState::class);
+    }
+
+    /**
+     * Return type of order
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function type()
+    {
+        return $this->belongsTo(OrderType::class);
     }
 
     /**

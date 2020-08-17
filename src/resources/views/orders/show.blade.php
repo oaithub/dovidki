@@ -16,7 +16,7 @@
                 </div>
                 <!-- CARDBODY START -->
                 <div class="card-body">
-                    {{-- Деталі замовлення --}}
+                    {{-- Деталі замовлення TODO: Add order-info file for user--}}
                     @include('admin.orders.includes.order-info')
                 </div>
                 <!-- CARDBODY END -->

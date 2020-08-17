@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\OrderCreateRequest;
 use App\Models\Order;
 use App\Repositories\OrderRepository;
+use App\Repositories\OrderTypeRepository;
 use Auth;
 
 class OrderController extends Controller
@@ -32,7 +33,7 @@ class OrderController extends Controller
     public function create()
     {
         $user = Auth::user();
-        $types = Order::typeList();
+        $types = (new OrderTypeRepository)->getAllForList();
 
         $requestStartTime = microtime(true);
         $groups = $user->groups();

@@ -7,6 +7,7 @@
     <div class="card">
         <div class="card-header">
             <h2>Усі заяви</h2>
+            {{-- TODO: Show type attribute --}}
         </div>
 
         <div class="card-body">

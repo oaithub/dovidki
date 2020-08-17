@@ -11,10 +11,10 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function index()
+    public function redirectToHome()
     {
         if(Auth::user()->isManager()) {
-            return redirect()->route('admin.order.index');
+            return redirect()->route('admin.home');
         }
         else {
             return redirect()->route('user.profile');

@@ -13,7 +13,7 @@
         <tr>
             <th scope="row">{{ $order->id }}</th>
             <td>{{ $order->group->specialty }}, {{ $order->group->year }} курс</td>
-            <td>{{ $order->type }}</td>
+            <td>{{ $order->type->name }}</td>
             <td>
                 @include('orders.includes._order-state', ['stateCode' => $order->state->code])
             </td>

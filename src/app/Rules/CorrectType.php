@@ -2,7 +2,7 @@
 
 namespace App\Rules;
 
-use App\Models\Order;
+use App\Repositories\OrderTypeRepository;
 use Illuminate\Contracts\Validation\Rule;
 
 class CorrectType implements Rule
@@ -16,7 +16,7 @@ class CorrectType implements Rule
      */
     public function passes($attribute, $value)
     {
-        return Order::typeList()->keys()->contains($value);
+        return (new OrderTypeRepository())->getAllId()->contains($value);
     }
 
     /**

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 Use App\Models\User;
 use Auth;
@@ -85,6 +84,6 @@ class LoginController extends Controller
             $newUser->save();
             auth()->login($newUser, true);
         }
-        return redirect(RouteServiceProvider::HOME);
+        return redirect()->route('home');
     }
 }

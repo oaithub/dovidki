@@ -5,10 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\OrderUpdateRequest;
 use App\Repositories\OrderRepository;
-use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
+    /**
+     * @var string
+     */
+    protected $type;
+
     /**
      * @var OrderRepository
      */
@@ -17,6 +21,7 @@ class OrderController extends Controller
     public function __construct()
     {
         $this->orderRepository = app(OrderRepository::class);
+        $this->orderRepository->setType($this->type);
     }
 
     /**
@@ -29,42 +34,6 @@ class OrderController extends Controller
         $orders = $this->orderRepository->getAllWithPaginate(15);
 
         return view('admin.orders.index', compact('orders'));
-    }
-
-    /**
-     * Show list of all orders in manager panel which are in queue
-     *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function inQueue()
-    {
-        $orders = $this->orderRepository->getInQueuedWithPaginate(15);
-
-        return view('admin.orders.in-queue', compact('orders'));
-    }
-
-    /**
-     * Show list of all issued orders in manager panel
-     *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function issued()
-    {
-        $orders = $this->orderRepository->getIssuedWithPaginate(15);
-
-        return view('admin.orders.issued', compact('orders'));
-    }
-
-    /**
-     * Show list of all ready(and not issued) orders in manager panel
-     *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function ready()
-    {
-        $orders = $this->orderRepository->getReadyWithPaginate(15);
-
-        return view('admin.orders.ready', compact('orders'));
     }
 
     /**
@@ -90,9 +59,9 @@ class OrderController extends Controller
 
         $result = $item->update($data);
 
-        if ($item) {
+        if ($result) {
             return redirect()
-                ->route('admin.order.show', $item->id)
+                ->route('admin.order.'.$item->type->code.'.show', $item->id)
                 ->with('success', __('message.order.updated'));
         } else {
             return back()

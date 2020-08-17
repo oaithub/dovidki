@@ -29,7 +29,7 @@ class OrderCreateRequest extends FormRequest
         $dateRules = 'required|date|after:'.now()->subYears(6)->format('M Y');
         return [
             'group' => ['required', new CorrectGroup],
-            'type' => ['required', new CorrectType],
+            'type_id' => ['required', new CorrectType],
             'period_from' => $dateRules,
             'period_to' => $dateRules,
         ];

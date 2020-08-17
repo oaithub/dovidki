@@ -29,11 +29,11 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="type">Тип довідки:</label>
-                    <select class="form-control" name="type" required>
+                    <label for="type_id">Тип довідки:</label>
+                    <select class="form-control" name="type_id" required>
                         <option value="" hidden>Виберіть</option>
-                        @foreach($types as $id => $typeName)
-                            <option value="{{ $id }}">Довідка про {{ $typeName }}</option>
+                        @foreach($types as $type)
+                            <option value="{{ $type->id }}">Довідка про {{ $type->name }}</option>
                         @endforeach
                     </select>
                 </div>

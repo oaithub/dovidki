@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('/', 'HomeController@index')
+    Route::get('/', 'HomeController@redirectToHome')
         ->name('home');    //Redirect common user to his profile, manager to control panel
 
     Route::resource('orders', 'OrderController')
@@ -24,19 +24,29 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/profile', 'UserController@current')->name('user.profile');    //User profile view
 
+
     Route::group(['middleware' => 'manager', 'prefix' => 'manager', 'namespace' => 'Admin'], function () {
 
+        Route::get('/', 'HomeController@admin')->name('admin.home');
+
+        Route::group(['prefix' => 'orders'], function() {
+            $methods = ['index', 'show', 'update'];
+            Route::resource('debt', 'DebtOrderController')
+                ->only($methods)
+                ->names('admin.order.debt');
+
+            Route::resource('income', 'IncomeOrderController')
+                ->only($methods)
+                ->names('admin.order.income');
+
+            Route::resource('study', 'StudyOrderController')
+                ->only($methods)
+                ->names('admin.order.study');
+        });
+
         Route::resource('users', 'UserController')
-            ->only(['index', 'show', 'edit', 'update'])
+        ->only(['index', 'show', 'edit', 'update'])
             ->names('admin.user');
-
-        Route::get('/orders/in-queue', 'OrderController@inQueue')->name('admin.order.inQueue');
-        Route::get('/orders/issued', 'OrderController@issued')->name('admin.order.issued');
-        Route::get('/orders/ready', 'OrderController@ready')->name('admin.order.ready');
-
-        Route::resource('orders', 'OrderController')
-            ->only(['index', 'show', 'update'])
-            ->names('admin.order');
 
         Route::resource('roles', 'RoleController')
             ->except(['create'])

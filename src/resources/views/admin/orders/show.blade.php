@@ -38,7 +38,7 @@
                             @if($order->state->code == 'in-queue')
                                 <!-- ORDER-READY TOGGLE START -->
                                 <div class="tab-pane" id="order-ready" role="tabpanel">
-                                    <form action="{{ route('admin.order.update', $order->id) }}" method="POST">
+                                    <form action="{{ route('admin.order.'.$order->type->code.'.update', $order->id) }}" method="POST">
                                         @csrf
                                         @method('PATCH')
                                         <input type="hidden" name="state_id" value="{{ \App\Models\OrderState::STATE_WAIT_FOR_ISSUE }}">
@@ -54,7 +54,7 @@
 
                             <!-- ORDER-ISSUED TOGGLE START -->
                             <div class="tab-pane active" id="order-issued" role="tabpanel">
-                                <form action="{{ route('admin.order.update', $order->id) }}" method="POST">
+                                <form action="{{ route('admin.order.'.$order->type->code.'.update', $order->id) }}" method="POST">
                                     @csrf
                                     @method('PATCH')
                                     <input type="hidden" name="state_id" value="{{ \App\Models\OrderState::STATE_ISSUED }}">
@@ -69,7 +69,7 @@
 
                             <!-- ORDER-CANCELED TOGGLE START -->
                             <div class="tab-pane" id="order-canceled" role="tabpanel">
-                                <form action="{{ route('admin.order.update', $order->id) }}" method="POST">
+                                <form action="{{ route('admin.order.'.$order->type->code.'.update', $order->id) }}" method="POST">
                                     @csrf
                                     @method('PATCH')
                                     <input type="hidden" name="state_id" value="{{ \App\Models\OrderState::STATE_CANCELED_BY_MANAGER }}">
