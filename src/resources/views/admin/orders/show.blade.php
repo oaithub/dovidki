@@ -14,7 +14,7 @@
                 <!-- CARDBODY START -->
                 <div class="card-body">
                     {{-- Деталі замовлення --}}
-                    @include('admin.orders.includes.order-info')
+                    @include('admin.orders.includes._order-info')
 
                     <hr>
 
