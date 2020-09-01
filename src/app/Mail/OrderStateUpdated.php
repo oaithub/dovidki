@@ -30,6 +30,8 @@ class OrderStateUpdated extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.order-state-updated');
+        return $this
+            ->markdown('emails.order-state-updated')
+            ->subject('Зміна статусу замовлення');
     }
 }
