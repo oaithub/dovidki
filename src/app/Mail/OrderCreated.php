@@ -30,6 +30,8 @@ class OrderCreated extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.order-created');    //TODO
+        return $this
+            ->markdown('emails.order-created')
+            ->subject('Нове замовлення на видачу довідки');
     }
 }
