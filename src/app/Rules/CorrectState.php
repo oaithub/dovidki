@@ -2,7 +2,7 @@
 
 namespace App\Rules;
 
-use App\Models\OrderState;
+use App\Repositories\OrderStateRepository;
 use Illuminate\Contracts\Validation\Rule;
 
 class CorrectState implements Rule
@@ -16,7 +16,7 @@ class CorrectState implements Rule
      */
     public function passes($attribute, $value)
     {
-        return (new OrderState)->all()->pluck('id')->toBase()->contains($value);
+        return (new OrderStateRepository())->getAllId()->contains($value);
     }
 
     /**

@@ -34,14 +34,14 @@ class OrderRepository extends CoreRepository
      * @param int $count Orders per page
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getAllWithPaginate($count = 25)    //TODO: with('state:code,name')
+    public function getAllWithPaginate($count = 25)
     {
         $columns = ['id', 'user_id', 'group', 'type_id', 'state_id', 'response_message', 'user_id',];
 
         $result = $this->startConditions()
             ->select($columns)
             ->oldest('id')
-            ->with(['user:id,name', 'state', 'type'])
+            ->with(['user:id,name', 'state:id,code', 'type:id,code,name'])
             ->paginate($count);
 
         return $result;
@@ -60,7 +60,7 @@ class OrderRepository extends CoreRepository
 
         $result = $this->startConditions()
             ->select($columns)
-            ->with('user', 'state', 'type')
+            ->with('user:id,name', 'state:id,code', 'type:id,code,name')
             ->where('user_id', $userId)
             ->oldest('id')
             ->paginate($count);

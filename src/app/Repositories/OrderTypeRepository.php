@@ -6,7 +6,7 @@ use App\Models\OrderType as Model;
 use Illuminate\Support\Collection;
 
 /**
- * Class OrderRepository.
+ * Class OrderTypeRepository.
  */
 class OrderTypeRepository extends CoreRepository
 {
