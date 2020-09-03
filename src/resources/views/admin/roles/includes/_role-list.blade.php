@@ -24,12 +24,13 @@
             <td colspan="4" class="text-center">Ролі відсутні</td>
         </tr>
     @endforelse
-
-    @if($userIdForEdit ?? false)
-        <tr>
-            <td colspan="4" class="text-center"><a href="{{ route('admin.user.edit', $userIdForEdit) }}">Редагувати список</a></td>
-            {{-- TODO: Change style --}}
-        </tr>
-    @endif
     </tbody>
 </table>
+
+@if($userIdForEdit ?? false)
+    <a href="{{ route('admin.user.edit', $userIdForEdit) }}">
+        <button type="button" class="btn btn-secondary btn-block btn-lg mb-4">
+            Редагувати ролі
+        </button>
+    </a>
+@endif

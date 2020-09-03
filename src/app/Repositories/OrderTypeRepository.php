@@ -26,6 +26,7 @@ class OrderTypeRepository extends CoreRepository
 
         $result = $this->startConditions()
             ->select($columns)
+            ->orderBy('id', 'ASC')
             ->toBase()
             ->get();
 

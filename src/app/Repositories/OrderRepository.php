@@ -3,6 +3,8 @@
 namespace App\Repositories;
 
 use App\Models\Order as Model;
+use DB;
+use Illuminate\Support\Collection;
 
 /**
  * Class OrderRepository.
@@ -87,6 +89,26 @@ class OrderRepository extends CoreRepository
      */
     public function getForShow($id) {
         return $this->startConditions()->find($id);
+    }
+
+    /**
+     * Return one order for show
+     *
+     * @param Collection $orderTypeIdList Collection of all order types id
+     * @return \Illuminate\Support\Collection
+     */
+    public function getCount($orderTypeIdList) {    //TODO: Refactor
+
+        foreach ($orderTypeIdList as $typeId) {
+            $result[$typeId] = DB::table('orders')
+                ->select('state_id', DB::raw('count(*) as total'))
+                ->where('type_id', $typeId)
+                ->groupBy('state_id')
+                ->pluck('total','state_id')
+                ->all();
+        }
+
+        return collect($result);
     }
 
     protected function startConditions()
